@@ -1,0 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	 <li
+	 	 id="todo-${item.id}"
+	     data-id="${item.id}"
+	     data-completed="${item.state}"
+	     class="todo-item ${item.state ? 'completed' : ''}">
+	 	<input type="checkBox" class="checkbox" onClick="toggleState(${item.id})"
+	 		${item.state?'checked':'' }/>
+        <span>${item.text}</span>
+        <span class="priority-badge ${item.priority}">
+        	<c:choose>
+        		<c:when test="${item.priority eq 'high'}">높음</c:when>
+                <c:when test="${item.priority eq 'medium'}">중간</c:when>
+                <c:otherwise>낮음</c:otherwise>
+            </c:choose>
+        </span>
+        <button class="delete-btn" onclick="deleteTodo(event, ${item.id})">삭제</button>
+      </li>
+</body>
+</html>

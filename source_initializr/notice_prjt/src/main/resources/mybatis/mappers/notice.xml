@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.human.notice.repository.NoticeDAO">
+    <resultMap id="noticeResult" type="com.human.notice.vo.NoticeVO">
+        <result property="idx" column="n_idx"/>
+        <result property="category" column="n_category"/>
+        <result property="title" column="n_title"/>
+        <result property="content" column="n_content"/>
+        <result property="regdate" column="n_regdate"/>
+        <result property="update" column="n_update"/>
+        <result property="status" column="n_status"/>
+    </resultMap>
+
+    <select id="selectAllNoticeList" resultMap="noticeResult">
+        <![CDATA[
+        SELECT n_idx, n_category, n_title, n_regdate
+        from tb_notice
+        ORDER BY n_idx DESC
+        ]]>
+    </select>
+</mapper>

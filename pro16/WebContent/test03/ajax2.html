@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax 예제2</title>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	function fn_process() {
+		$.ajax({
+			type: "post",
+			async: false,
+			url: "http://localhost:8090/pro16/ajaxTest2",
+			dataType: "xml",
+			success: function(info, textStatus) {
+				$(info).find("book").each(function(){
+					var title = $(this).find("title").text();
+					var writer = $(this).find("writer").text();
+					var image = $(this).find("image").text();
+
+					$("#message").append(
+						"<p><strong>" + title + "</strong></p>" +
+						"<p>" + writer + "</p>" +
+						"<img src='" + image + "' style='width:150px'/><hr/>"
+					);
+				});
+			},
+			error: function() {
+				alert("에러가 발생했습니다.");
+			}
+		});
+	}
+</script>
+</head>
+<body>
+	<input type="button" value="전송하기" onClick="fn_process()"/><br/><br/>
+	<div id="message"></div>
+</body>
+</html>
