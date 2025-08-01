@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>header</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+
+    <body>
+
+        <header>
+            <div class="headerContainer">
+
+                <h1>
+                    <button class="headLogo" onclick="goMain()">
+                        <img alt="로고">
+                    </button>
+                </h1>
+
+                <!-- nav 태그 -->
+                <nav>
+                    <div id="menu">
+                        <ul>
+                            <li>
+                                <a href="#" onclick="goEx();">운동법</a></button>
+                            </li>
+                            <li>
+                                <a href="#">건강보조</a>
+                                <ul>
+                                    <li><a href="#" onclick="goEq();">운동장비</a></li>
+                                    <li><a href="#" onclick="goSup();">건강보조식품</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">커뮤니티</a>
+                                <ul>
+                                    <li><a href="#" onclick="goBoard();">자유게시판</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                </nav>
+                <!-- nav 끝 -->
+
+                <button id="button" onclick="goLogin()">로그인</button>
+
+            </div>
+            <!-- container div 끝 -->
+
+        </header>
+        <!-- header 끝 -->
+
+        <div class="backgroundHeader"></div>
+
+    </body>
+
+</html>

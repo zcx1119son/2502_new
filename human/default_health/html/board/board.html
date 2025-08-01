@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>board</title>
+    <link rel="stylesheet" href="../../css/board/board.css" />
+    <link rel="stylesheet" href="../../css/common/header.css" />
+    <link rel="stylesheet" href="../../css/admin/admin.css" />
+    <link rel="stylesheet" href="../../images/common/disableSirenLogo.png" />
+
+    <!-- <link rel="stylesheet" href="../../css/common/common.css" /> -->
+  </head>
+
+  <body>
+    <!-- <div data-include-path="../includes/header.html"></div> -->
+    <div data-include-path="../includes/header.html"></div>
+
+    <div class="contain">
+      <div class="header">
+        <div class="userSearch">
+          <div id="sform">
+            <select name="category">
+              <option value="1" selected>제목</option>
+              <option value="2">글쓴이</option>
+              <option value="3">등록일</option>
+              <option value="4">조회 수</option>
+            </select>
+            <input type="search" placeholder="내용을 입력하세요." />
+
+            <form action="#">
+              <input class="sButton" type="button" value="검색" />
+            </form>
+
+            <form action="#">
+              <input
+                onclick="goWrite()"
+                class="Wbutton"
+                type="button"
+                value="글쓰기"
+              />
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- header end-------------------------------------------------------------- -->
+
+      <div class="main">
+        <table id="board">
+          <thead>
+            <tr>
+              <th onclick="sortTable(0)">번호</th>
+              <th onclick="sortTable(1)">분류</th>
+              <th>제목</th>
+              <th>글쓴이</th>
+              <th>등록일</th>
+              <th>조회</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="notice">
+              <td>-</td>
+              <td style="color: red">공지</td>
+              <td onclick="goList()" style="color: red; cursor: pointer">
+                [중요] 커뮤니티 이용 안내
+              </td>
+              <td>관리자</td>
+              <td>01-01</td>
+              <td>200</td>
+            </tr>
+
+            <tr>
+              <td>41</td>
+              <td style="color: rgb(179, 179, 10)">문의</td>
+              <td>관리자님 확인 부탁드립니다.</td>
+              <td>name1</td>
+              <td>01-10</td>
+              <td>100</td>
+            </tr>
+
+            <tr>
+              <td>40</td>
+              <td>일반</td>
+              <td>아르기닌 꼭 먹어야하나요?</td>
+              <td>헬린이</td>
+              <td>01-10</td>
+              <td>100</td>
+            </tr>
+
+            <tr>
+              <td>39</td>
+              <td style="color: cadetblue">모집</td>
+              <td>오늘 7시 천안 대흥동 천안역에서 런닝 하실 분 구합니다.</td>
+              <td>런닝맨</td>
+              <td>01-08</td>
+              <td>110</td>
+            </tr>
+
+            <tr>
+              <td>38</td>
+              <td>일반</td>
+              <td>다들 식후 시간 뒤에 운동하시나요?</td>
+              <td>대흉근</td>
+              <td>01-07</td>
+              <td>30</td>
+            </tr>
+
+            <tr>
+              <td>37</td>
+              <td style="color: cadetblue">모집</td>
+              <td>월요일은 가슴인데 같이 갈사람~</td>
+              <td>두근두근</td>
+              <td>01-06</td>
+              <td>150</td>
+            </tr>
+
+            <tr>
+              <td>36</td>
+              <td style="color: rgb(179, 179, 10)">문의</td>
+              <td>정지 문의가 있습니다.</td>
+              <td>정지</td>
+              <td>01-03</td>
+              <td>2</td>
+            </tr>
+
+            <tr>
+              <td>35</td>
+              <td>일반</td>
+              <td>제로투 보호대 쓰시는 분 있나요?</td>
+              <td>쾌걸근육맨</td>
+              <td>01-03</td>
+              <td>157</td>
+            </tr>
+
+            <tr>
+              <td>34</td>
+              <td style="color: cadetblue">모집</td>
+              <td>오늘 7시 천안 대흥동 천안역에서 런닝 하실 분 구합니다.</td>
+              <td>런닝맨</td>
+              <td>01-03</td>
+              <td>56</td>
+            </tr>
+
+            <tr>
+              <td>33</td>
+              <td style="color: cadetblue">모집</td>
+              <td>금일 두정동 더라이프짐에서 일일권으로 같이 운동하실 분들~</td>
+              <td>남자의향기</td>
+              <td>01-03</td>
+              <td>87</td>
+            </tr>
+
+            <tr>
+              <td>32</td>
+              <td>일반</td>
+              <td>천국의 계단 중고구매해도 괜찮을까요?</td>
+              <td>평생다이욧</td>
+              <td>01-02</td>
+              <td>30</td>
+            </tr>
+
+            <tr>
+              <td>31</td>
+              <td>일반</td>
+              <td>김종국 광고하는 칼로바이 밸런스 내돈내산 맛평</td>
+              <td>뮤햔됴뎐</td>
+              <td>01-02</td>
+              <td>12</td>
+            </tr>
+
+            <tr>
+              <td>30</td>
+              <td style="color: cadetblue">모집</td>
+              <td>혹시 새해에 같이 크로스핏 다니실 분 있을까요?????????</td>
+              <td>아웃사이더</td>
+              <td>01-01</td>
+              <td>10</td>
+            </tr>
+
+            <tr>
+              <td>29</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+
+            <tr>
+              <td>28</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>27</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>26</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>25</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>24</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>23</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>22</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>21</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>20</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>19</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>18</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>17</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>16</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td>1</td>
+              <td>일반</td>
+              <td>공개설정 제목입니다.</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- 페이징 --------------------------------------------------------------------------->
+      <div class="paging">
+        <i class="fa-solid fa-angles-left" id="first_page"></i>
+        <i class="fa-solid fa-angle-left" id="prev_page"></i>
+
+        <div class="pages">
+          <span class="active">1</span>
+          <span>2</span>
+          <span>3</span>
+          <span>4</span>
+          <span>5</span>
+          <span>...(더보기)</span>
+        </div>
+
+        <i class="fa-solid fa-angle-right" id="next_page"></i>
+        <i class="fa-solid fa-angles-right" id="last_page"></i>
+      </div>
+    </div>
+    <!-- <script src="../../js/headerImport.js"></script> -->
+    <script src="../../js/includes/headerImport.js"></script>
+
+    <!-- <script src="../../js/board.js"></script> -->
+    <script src="../../js/board/board.js"></script>
+    <script></script>
+  </body>
+</html>

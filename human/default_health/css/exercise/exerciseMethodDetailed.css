@@ -1,0 +1,50 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  margin: auto;
+  background-color: #f9f9f9;
+}
+
+.exercise-img {
+  margin-top: 30px;
+  width: 700px;
+  height: auto;
+  /* margin-top: 300px; */
+}
+
+.description-box {
+  border: 1px solid #000;
+  width: 400px;
+  text-align: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.button {
+  width: 33em;
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  margin-top: 1.9rem;
+  margin-bottom: 1.9em;
+  background-color: #0077cc;
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.excercise-text {
+  text-align: center;
+  margin: 20px;
+  bottom: 50px;
+}

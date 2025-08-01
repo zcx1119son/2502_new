@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>헬스 커뮤니티</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="stylesheet" href="../css/index.css">
+        <!-- <link rel="stylesheet" href="../css/common/common.css"> -->
+        <link rel="stylesheet" href="../css/common/header.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap">
+        <link rel="stylesheet" href="../css/common/footer.css">
+    </head>
+
+    <body>
+        <div data-include-path="./includes/header.html"></div>
+        <div class='parent'>
+
+            <!-- 광고 영역 -->
+            <div class='child'>
+                <section id="bannerAd">
+                    <div class="adSlide">
+                        <div class="imgSlide">
+                            <div class="slideInner">
+                                <div class="slider" role="group" aria-label="1/5">
+                                    <a href=# onclick="siteLink()">
+                                        <img src="../images/supplements/Protein1.jpg" alt="첫 번째 광고">
+                                    </a>
+                                </div>
+                                <div class="slider" role="group" aria-label="2/5">
+                                    <a href=# onclick="siteLink()">
+                                        <img src="../images/supplements/nutritional2.JPG" alt="두 번째 광고">
+                                    </a>
+                                </div>
+                                <div class="slider" role="group" aria-label="3/5">
+                                    <a href=# onclick="siteLink()">
+                                        <img src="../images/supplements/Protein3.jpg" alt="세 번째 광고">
+                                    </a>
+                                </div>
+                                <div class="slider" role="group" aria-label="4/5">
+                                    <a href=# onclick="siteLink()">
+                                        <img src="../images/supplements/Protein4.jpg" alt="네 번째 광고">
+                                    </a>
+                                </div>
+                                <div class="slider" role="group" aria-label="5/5">
+                                    <a href=# onclick="siteLink()">
+                                        <img src="../images/supplements/Protein5.jpg" alt="다섯 번째 광고">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="slideBtn">
+                    <a href="#" class="prev" role="button"><img src="../images/common/lefttriangle.png"></a>
+                    <a href="#" class="next" role="button"><img src="../images/common/righttriangle.png"></a>
+                </div>
+            </div>
+            <!-- 광고 영역 끝 -->
+
+            <!-- 로그인 영역 -->
+            <div class='child'>
+                <section id="login">
+                    <div id="container">
+                        <button type="button" id="loginBtn" onclick="goLogin()">
+                            로 그 인
+                        </button>
+                        <pre></pre>
+                        <div class="searchId" onclick="searchId()">아이디 찾기</div>
+                        <div class="searchPw" onclick="searchPw()">비밀번호 찾기</div>
+                        <div class="goJoin" onclick="goJoin()">회원가입</div>
+                    </div>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/EBjYQeeBI-0?si=k6AHqtGZQaAU-9eg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </section>
+            </div>
+            <!-- 로그인 영역 끝 -->
+        </div>
+
+        <!-- 삼대운동 영역 -->
+        <div class="mainExercise">
+            <div style="float: left; text-align: center; margin-right: 50px;">
+                <h2>데드리프트</h2>
+                <div>
+                   <img src="../images/ex/deadlift.gif">
+                </div>
+            </div>
+
+            <div style="float: left; text-align: center; margin-right: 50px;">
+                <h2>스쿼트</h2>
+                <div>
+                    <img src="../images/ex/squat.gif">
+                </div>
+            </div>
+
+            <div style="float: left; text-align: center; margin-right: 50px;">
+                <h2>벤치프레스</h2>
+                <div>
+                    <a href="../html/exercise/exerciseMethodDetailed.html">
+                    <img src="../images/ex/benchPress.gif" alt=""></a>
+                </div>
+            </div>
+
+        </div>
+        <!-- 운동 영역 끝 -->
+        <div data-include-path="./includes/footer.html"></div>
+
+        <script src="../js/includes/headerImport.js"></script>
+        <script src="../js/indexTomenu.js"></script>
+        <script src="../js/common/index.js"></script>
+    </body>
+
+</html>

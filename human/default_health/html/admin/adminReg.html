@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+    
+<!-- 관리자 페이지(등록 페이지) -->
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>관리자 페이지</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="stylesheet" href="../../css/common/header.css">
+        <link rel="stylesheet" href="../../css/admin/admin.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+
+    <body>
+        <!-- 헤더 임포트 -->
+        <div data-include-path="../includes/header_admin.html"></div>
+
+        <!-- 탭 메뉴 -->
+        <div class="tabs">
+
+            <input id="exM" type="radio" name="tabItem" checked>
+            <label class="tabRegItem" for="exM">운동법</label>
+
+            <input id="adM" type="radio" name="tabItem">
+            <label class="tabRegItem" for="adM">배너광고</label>
+
+            <input id="healthM" type="radio" name="tabItem">
+            <label class="tabRegItem" for="healthM">건강보조식품</label>
+
+            <input id="equipmentM" type="radio" name="tabItem">
+            <label class="tabRegItem" for="equipmentM">운동기구</label>
+
+            <!-- 운동법 탭 -->
+            <div class="tabContent" id="exMContent">
+
+                <div class="detailTabs">
+
+                    <form action="#" method="get" id="exChange">
+
+                        <input id="chest" type="radio" name="detailItem" checked>
+                        <label class="detailRegItem" for="chest">가슴</label>
+
+                        <input id="back" type="radio" name="detailItem">
+                        <label class="detailRegItem" for="back">등</label>
+
+                        <input id="shoulder" type="radio" name="detailItem">
+                        <label class="detailRegItem" for="shoulder">어깨</label>
+
+                        <input id="under" type="radio" name="detailItem">
+                        <label class="detailRegItem" for="under">하체</label>
+
+                        <input id="abs" type="radio" name="detailItem">
+                        <label class="detailRegItem" for="abs">복근</label>
+
+                        <div class="detailContent" id="chestContent">
+
+                            <table id="exMet">
+                                <tr>
+                                    <td>운동이름</td>
+                                    <td>이미지</td>
+                                    <td>상세 설명</td>
+                                    <td>게시여부</td>
+                                    <td>삭제</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" placeholder="운동명"></td>
+                                    <td>
+                                        <input type="file">
+                                    </td>
+                                    <td><input type="text" placeholder="상세 설명"></td>
+                                    <td>
+                                        <select name="" id="">
+                                            <option value="">O</option>
+                                            <option value="">X</option>
+                                        </select>
+                                    </td>
+                                    <td><button type="button" class="button" onclick="deleteRow(this)">삭제</button></td>
+                                </tr>
+                            </table>
+                            <button class="button" type="button" value="add" name="add" onclick="addExRow();">추가하기</button>
+
+                        </div>
+
+                        <div class="detailContent" id="backContent">
+                            <table id="exMet">
+                                <tr>
+                                    <td contenteditable="false">운동이름</td>
+                                    <td contenteditable="false">이미지</td>
+                                    <td contenteditable="false">상세 설명</td>
+                                    <td contenteditable="false">게시여부</td>
+                                    <td contenteditable="false">삭제</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" placeholder="운동명"></td>
+                                    <td>
+                                        <input type="file">
+                                    </td>
+                                    <td><input type="text" placeholder="상세 설명"></td>
+                                    <td>
+                                        <select name="" id="">
+                                            <option value="">O</option>
+                                            <option value="">X</option>
+                                        </select>
+                                    </td>
+                                    <td><button type="button" class="button" onclick="deleteRow(this)">삭제</button></td>
+                                </tr>
+                            </table>
+                            <button class="button" type="button" value="add" name="add" onclick="addExRow();">추가하기</button>
+                        </div>
+
+                        <div class="detailContent" id="shoulderContent">
+                            <table id="exMet" contenteditable="true">
+                                <tr>
+                                    <td contenteditable="false">운동이름</td>
+                                    <td contenteditable="false">이미지</td>
+                                    <td contenteditable="false">상세 설명</td>
+                                    <td contenteditable="false">게시여부</td>
+                                    <td contenteditable="false">삭제</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" placeholder="운동명"></td>
+                                    <td>
+                                        <input type="file">
+                                    </td>
+                                    <td><input type="text" placeholder="상세 설명"></td>
+                                    <td>
+                                        <select name="" id="">
+                                            <option value="">O</option>
+                                            <option value="">X</option>
+                                        </select>
+                                    </td>
+                                    <td><button type="button" class="button" onclick="deleteRow(this)">삭제</button></td>
+                                </tr>
+                            </table>
+                            <button class="button" type="button" value="add" name="add" onclick="addExRow();">추가하기</button>
+                        </div>
+
+                        <div class="detailContent" id="underContent">
+                            <table id="exMet" contenteditable="true">
+                                <tr>
+                                    <td contenteditable="false">운동이름</td>
+                                    <td contenteditable="false">이미지</td>
+                                    <td contenteditable="false">상세 설명</td>
+                                    <td contenteditable="false">게시여부</td>
+                                    <td contenteditable="false">삭제</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" placeholder="운동명"></td>
+                                    <td>
+                                        <input type="file">
+                                    </td>
+                                    <td><input type="text" placeholder="상세 설명"></td>
+                                    <td>
+                                        <select name="" id="">
+                                            <option value="">O</option>
+                                            <option value="">X</option>
+                                        </select>
+                                    </td>
+                                    <td><button type="button" class="button" onclick="deleteRow(this)">삭제</button></td>
+                                </tr>
+                            </table>
+                            <button class="button" type="button" value="add" name="add" onclick="addExRow();">추가하기</button>
+                        </div>
+
+                        <div class="detailContent" id="absContent">
+                            <table id="exMet" contenteditable="true">
+                                <tr>
+                                    <td contenteditable="false">운동이름</td>
+                                    <td contenteditable="false">이미지</td>
+                                    <td contenteditable="false">상세 설명</td>
+                                    <td contenteditable="false">게시여부</td>
+                                    <td contenteditable="false">삭제</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" placeholder="운동명"></td>
+                                    <td>
+                                        <input type="file">
+                                    </td>
+                                    <td><input type="text" placeholder="상세 설명"></td>
+                                    <td>
+                                        <select name="" id="">
+                                            <option value="">O</option>
+                                            <option value="">X</option>
+                                        </select>
+                                    </td>
+                                    <td><button type="button" class="button" onclick="deleteRow(this)">삭제</button></td>
+                                </tr>
+                            </table>
+                            <button class="button" type="button" onclick="addExRow();">추가하기</button>
+                        </div>
+
+                    </form>
+                    <!-- 운동법 form 종료 -->
+
+                    <div class="userSearch">
+                        <input type="text" placeholder="검색">
+                        <button type="button">검색</button>
+                    </div>
+
+                </div>
+                <!-- 운동법 세부 탭 끝 -->
+
+                <!-- 페이징 처리 영역 -->
+                <div class="paging">
+                    <i class="fa-solid fa-angles-left" id="first_page"></i>
+                    <i class="fa-solid fa-angle-left" id="prev_page"></i>
+
+                    <div class="pages">
+                        <span class="active">1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>...(더보기)</span>
+                    </div>
+
+                    <i class="fa-solid fa-angle-right" id="next_page"></i>
+                    <i class="fa-solid fa-angles-right" id="last_page"></i>
+                </div>
+            </div>
+            <!-- 운동법 전체 끝 -->
+
+            <!-- 광고 탭 -->
+            <div class="tabContent" id="adMContent">
+                <form action="#" method="get" id="adAdd">
+                    <table id="adAdd">
+                        <thead>
+                            <tr>
+                                <th>번호</th>
+                                <th>광고명</th>
+                                <th>광고링크</th>
+                                <th>적용 여부</th>
+                                <th>광고내리기</th>
+                                <th>게시일자</th>
+                                <th>마감일자</th>
+                                <th>삭제</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td contenteditable="true"><input type="text" placeholder="번호" readonly></td>
+                            <td><input type="text" placeholder="보충제"></td>
+                            <td><input type="text" placeholder="광고링크"></td>
+                            <td>
+                                <select name="" id="">
+                                    <option value="">O</option>
+                                    <option value="">X</option>
+                                </select>
+                            </td>
+                            <td>
+                                <button type="button" class="button">광고내리기</button>
+                            </td>
+                            <td>25/04/14</td>
+                            <td>25/04/14</td>
+                            <td><button type="button" class="button" onclick="deleteRow(this)">삭제</button></td>
+                        </tr>
+                    </table>
+                    <button class="button" type="button" value="addAd" name="addAd" onclick="addAdRow();">추가하기</button>
+                </form>
+                <!-- 광고 form 종료 -->
+
+                <div class="userSearch">
+                    <input type="text" placeholder="검색">
+                    <button type="button">검색</button>
+                </div>
+
+                <!-- 페이징 처리 영역 -->
+                <div class="paging">
+                    <i class="fa-solid fa-angles-left" id="first_page"></i>
+                    <i class="fa-solid fa-angle-left" id="prev_page"></i>
+
+                    <div class="pages">
+                        <span class="active">1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>...(더보기)</span>
+                    </div>
+
+                    <i class="fa-solid fa-angle-right" id="next_page"></i>
+                    <i class="fa-solid fa-angles-right" id="last_page"></i>
+                </div>
+
+            </div>
+            <!-- 광고 탭 끝 -->
+
+            <!-- 보충제, 영양제 탭 -->
+            <div class="tabContent" id="healthMContent">
+                <form action="#" method="get">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>상품 이미지</th>
+                            <th>상세설명 / URL</th>
+                            <th>게시여부</th>
+                            <th>등록일자</th>
+                            <th>게시일자</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <th><img src="../../images/supplements/nutritional7.JPG" alt="테스트"></th>
+                        <th>상세설명</th>
+                        <th>
+                            <select name="" id="">
+                                <option value="O">O</option>
+                                <option value="X">X</option>
+                            </select>
+                        </th>
+                        <th>25/04/14</th>
+                        <th>25/04/14</th>
+                        <td><button type="button" class="button" onclick="deleteRow(this)">삭제</button></td>
+                    </tr>
+                </table>
+                <button class="button" type="button" onclick="addHealthRow();">추가하기</button>
+            </form>
+            <!-- 보충제 영양제 form 종료 -->
+
+                <div class="userSearch">
+                    <input type="text" placeholder="검색">
+                    <button type="button">검색</button>
+                </div>
+
+                <!-- 페이징 처리 영역 -->
+                <div class="paging">
+                    <i class="fa-solid fa-angles-left" id="first_page"></i>
+                    <i class="fa-solid fa-angle-left" id="prev_page"></i>
+
+                    <div class="pages">
+                        <span class="active">1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>...(더보기)</span>
+                    </div>
+
+                    <i class="fa-solid fa-angle-right" id="next_page"></i>
+                    <i class="fa-solid fa-angles-right" id="last_page"></i>
+                </div>
+            </div>
+            <!-- 보충제, 영양제 탭 끝 -->
+
+            <!-- 운동기구 탭 -->
+            <div class="tabContent" id="equipmentContent">
+                <form action="#" method="get">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>상품 이미지</th>
+                            <th>상세설명 / URL</th>
+                            <th>게시여부</th>
+                            <th>등록일자</th>
+                            <th>게시일자</th>
+                            <th>삭제</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <th><img src="../../images/equipments/wristGuard.jpg" alt="테스트"></th>
+                        <th>상세설명</th>
+                        <th>
+                            <select name="" id="">
+                                <option value="O">O</option>
+                                <option value="X">X</option>
+                            </select>
+                        </th>
+                        <th>25/04/14</th>
+                        <th>25/04/14</th>
+                        <td><button type="button" class="button" onclick="deleteRow(this)">삭제</button></td>
+                    </tr>
+                </table>
+                <button class="button" type="button" onclick="addEquipRow();">추가하기</button>
+            </form>
+            <!-- 운동기구 form 종료 -->
+
+                <div class="userSearch">
+                    <input type="text" placeholder="검색">
+                    <button type="button">검색</button>
+                </div>
+
+                <!-- 페이징 처리 영역 -->
+                <div class="paging">
+                    <i class="fa-solid fa-angles-left" id="first_page"></i>
+                    <i class="fa-solid fa-angle-left" id="prev_page"></i>
+
+                    <div class="pages">
+                        <span class="active">1</span>
+                        <span>2</span>
+                        <span>3</span>
+                        <span>4</span>
+                        <span>5</span>
+                        <span>...(더보기)</span>
+                    </div>
+
+                    <i class="fa-solid fa-angle-right" id="next_page"></i>
+                    <i class="fa-solid fa-angles-right" id="last_page"></i>
+                </div>
+            </div>
+            <button class="addBtn" type="button" onclick="add();">수정하기</button>
+            <button class="listBtn" type="button" onclick="goList();">관리자 페이지 홈으로</button>
+        </div>
+        <!-- JQuery를 사용하기 위함 -->
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="../../js/includes/headerImport.js"></script>
+        <script src="../../js/admin/commonAdmin.js"></script>
+    </body>
+
+</html>

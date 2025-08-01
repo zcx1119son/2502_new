@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../../css/user/myPage.css">
+        <link rel="stylesheet" href="../../css/common/header.css">
+        <title>마이페이지</title>
+    </head>
+
+    <body>
+
+        <div data-include-path="../includes/header_user.html"></div>
+
+        <div class="section" id="mypage-container">
+            <h1>마이페이지</h1>
+            <!-- 프로필 영역 -->
+            <div class="section profile">
+                <h3>프로필 사진</h3>
+                <img src="../../images/user/profilPic.jpeg" alt="프로필 사진" onclick="openImageInNewWindow(this.src)" style="cursor: pointer;">
+                <div>
+                    <button onclick="changePhoto()">사진변경</button>
+                    <button onclick="deletePhoto()">삭제</button>
+                    <pre></pre>
+                    <button onclick="location.href='userUpdate.html'">회원정보수정</button>
+                    <button onclick="logOut()">로그아웃</button>
+                    <button onclick="confirmLeave()">회원탈퇴</button>
+                </div>
+            </div>
+
+            <!-- 운동 선택 -->
+            <div class="section" id="section-exercise">
+                <h2>운동 선택</h2>
+                <label for="exercise-select">근력운동</label>
+                <select id="muscle-exercise">
+                    <optgroup label="가슴">
+                        <option value="벤치프레스">벤치프레스</option>
+                        <option value="덤벨 벤치 프레스">덤벨 벤치 프레스</option>
+                        <option value="덤벨 풀오버">덤벨 풀오버</option>
+                        <option value="푸쉬업">푸쉬업</option>
+                        <option value="딥스">딥스</option>
+                        <option value="체스트 플레스 머신">체스트 플레스 머신</option>
+                        <option value="스미스 머신 벤치 프레스">스미스 머신 벤치 프레스</option>
+                    </optgroup>
+                    <optgroup label="등">
+                        <option value="데드리프트">데드리프트</option>
+                        <option value="바벨 로우">바벨 로우</option>
+                        <option value="풀 업">풀 업</option>
+                        <option value="루마니안 데드리프트">루마니안 데드리프트</option>
+                        <option value="랫 풀다운">랫 풀다운</option>
+                        <option value="백 익스텐션">백 익스텐션</option>
+                        <option value="시티드 케이블 로우">시티드 케이블 로우</option>
+                        <option value="시티드 로우 머신">시티드 로우 머신</option>
+                        <option value="덤벨 데드리프트">덤벨 데드리프트</option>
+                    </optgroup>
+                    <optgroup label="어깨">
+                        <option value="오버헤드 프레스">오버헤드 프레스</option>
+                        <option value="덤벨 숄더 프레스">덤벨 숄더 프레스</option>
+                        <option value="덤벨 레터럴 레이즈">덤벨 레터럴 레이즈</option>
+                        <option value="숄더 프레스 머신">숄더 프레스 머신</option>
+                        <option value="레터럴 레이즈 머신">레터럴 레이즈 머신</option>
+                        <option value="시티드 오버헤드 프레스">시티드 오버헤드 프레스</option>
+                        <option value="덤벨 프론트 레이즈">덤벨 프론트 레이즈</option>
+                        <option value="페이스 풀">페이스 풀</option>
+                        <option value="리버스 케이블 플라이">리버스 케이블 플라이</option>
+                    </optgroup>
+                    <optgroup label="하체">
+                        <option value="바벨 스쿼트">바벨 스쿼트</option>
+                        <option value="런지">런지</option>
+                        <option value="레그 프레스">레그 프레스</option>
+                        <option value="레그 컬">레그 컬</option>
+                        <option value="바벨 스티프 레그 데드리프트">바벨 스티프 레그 데드리프트</option>
+                        <option value="브이 스쿼트">브이 스쿼트</option>
+                        <option value="레그 익스텐션">레그 익스텐션</option>
+                        <option value="덤벨 런지">덤벨 런지</option>
+                        <option value="핵 스쿼트 머신">핵 스쿼트 머신</option>
+                    </optgroup>
+                    <optgroup label="복근">
+                        <option value="레그 레이즈">레그 레이즈</option>
+                        <option value="크런치">크런치</option>
+                        <option value="케이블 크런치">케이블 크런치</option>
+                        <option value="캡틴스 체어 레그 레이즈">캡틴스 체어 레그 레이즈</option>
+                        <option value="행잉 레그 레이즈">행잉 레그 레이즈</option>
+                        <option value="바이시클 크런치">바이시클 크런치</option>
+                        <option value="디클라인 크런치">디클라인 크런치</option>
+                        <option value="덤벨 사이드 밴드">덤벨 사이드 밴드</option>
+                        <option value="플랭크">플랭크</option>
+                        <option value="운동선택" selected>운동선택</option>
+                    </optgroup>
+                </select>
+
+                <label for="exercise-select">유산소</label>
+                <select id="aerobic-exercise">
+                    <option value="걷기">걷기</option>
+                    <option value="달리기">달리기</option>
+                    <option value="줄넘기">줄넘기</option>
+                    <option value="로잉머신">로잉머신</option>
+                    <option value="사이클">사이클</option>
+                    <option value="스텝퍼">스텝퍼</option>
+                    <option value="스텝밀">스텝밀</option>
+                    <option value="크로스 트레이너">크로스 트레이너</option>
+                    <option value="운동선택" selected>운동선택</option>
+                </select>
+                <input type="number" id="time" placeholder="운동 시간(분)">
+                <input type="number" id="goal" placeholder="목표 칼로리(kcal)">
+                <button onclick="showCalories()">칼로리 보기</button>
+                <!-- 칼로리 소모 결과 표시 -->
+                <div id="calorie-result" style="margin-top: 10px; font-size: 18px; font-weight: bold;"></div>
+
+                <!-- 목표 칼로리 및 진행률 -->
+                <div class="circle-container">
+                    <h3>일일 목표 활동량</h3>
+                    <canvas id="progressCanvas" width="150"></canvas>
+                </div>
+            </div>
+
+            <!-- 건강 정보 -->
+            <div class="section" id="section health-info">
+                <h2>건강 정보</h2>
+                <p>나이: <strong>39세</strong></p>
+                <p>성별: <strong>남성</strong></p>
+                <p>병력: <strong>역류성식도염</strong></p>
+                <canvas id="chart" width="400" height="200"></canvas>
+            </div>
+        </div>
+
+        <script src="../../js/includes/headerImport.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="../../js/user/myPage.js"></script>
+    </body>
+
+</html>

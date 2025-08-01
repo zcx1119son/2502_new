@@ -1,0 +1,30 @@
+body,
+html {
+  max-width: 1440px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  ;
+}
+
+form {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+
+  display: block;
+  justify-content: center;
+  align-items: center;
+  /* 헤더 공간 확보 */
+  background-color: #f3f7fb;
+  margin-top: 300px;
+}
+
+#loginLogo {
+  display: block;
+  margin: 100px auto 0 auto;
+  margin-bottom: -200px;
+  /* width: 120px; */
+}

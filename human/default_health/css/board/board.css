@@ -1,0 +1,54 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+  color: #333;
+
+}
+#sform {
+  width: 80%;
+  height: 50px;
+  margin: 80px auto;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  position: relative;
+}
+
+.userSearch input[type='search'] {
+  width: 600px;
+  margin: 0 10px 0 10px;
+}
+
+.sButton {
+  background-color: #333;
+  width: 100px;
+  height: 50px;
+  color: #fff;
+  position: relative;
+  cursor: pointer;
+  top: -0px;
+  left: 20px;
+}
+.Wbutton {
+  width: 100px;
+  height: 50px;
+  padding: 7px 12px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  margin-left: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  top: -0px;
+  left: 30px;
+}
+.contain {
+  max-width: 1400px;
+  width: 95%;
+  margin: 0 auto;
+}

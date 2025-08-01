@@ -1,0 +1,192 @@
+body {
+  background-color: #f9f9f9;;
+}
+
+.headerContainer {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* 기본 header 스타일 */
+header {
+  position: absolute;
+  color: #0077cc;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  padding: 1rem;
+}
+
+header .headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+header nav ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+header nav ul li {
+  padding: 8px;
+}
+
+header button {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  color: #000000;
+  margin: auto;
+}
+
+header h1 button {
+  position: relative;
+  left: 30px;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+header h1 img {
+  content: url('../../images/common/logo.png');
+}
+
+header nav ul li button {
+  color: #000000;
+  font-size: 1.2rem;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+#menu {
+  position: relative;
+  left: 0;
+  font: bold 25px 'malgun gothic';
+  width: 100%;
+  color: black;
+  line-height: 45px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#menu > ul > li {
+  float: left;
+  width: 250px;
+  position: relative;
+}
+
+#menu > ul > li > ul {
+  width: 250px;
+  top: 65px;
+  display: none;
+  position: absolute;
+  font-size: 16px;
+  background-color: #f9f9f9;
+}
+
+#menu > ul > li:hover > ul {
+  display: block;
+}
+
+/* #menu > ul > li > ul > li:hover {
+  background: #0077cc;
+} */
+
+#menu > ul > li > ul > li:hover {
+  background: none;
+  background-image: url('../../images/common/blackDum3.png');
+  background-position: 35px;
+  background-repeat: no-repeat;
+  background-size: 15%;
+}
+
+#loginBtn {
+  font-size: 15px;
+}
+
+/* 미디어 쿼리 추가 */
+@media screen and (max-width: 1024px) {
+  header .headerContainer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  header nav ul {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  header h1 button {
+    font-size: 2.5rem;
+    left: 0;
+  }
+
+  #menu > ul > li {
+    width: 100%;
+    float: none;
+  }
+
+  #menu > ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  header {
+    padding: 0.5rem;
+  }
+
+  header h1 button {
+    font-size: 2rem;
+  }
+
+  header nav ul li {
+    padding: 5px;
+  }
+
+  header nav ul li button {
+    font-size: 1rem;
+  }
+
+  #menu {
+    font-size: 24px;
+  }
+
+  #menu > ul > li > ul {
+    top: auto;
+    position: static;
+  }
+}
+
+.backgroundHeader {
+  background: url() center center;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 240px;
+}
+.myPage {
+  margin-right: 1rem;
+}
+
+.logOut {
+  margin-right: 5rem;
+}

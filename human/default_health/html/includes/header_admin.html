@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>header</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+    </head>
+
+    <body>
+
+        <header>
+            <div class="headerContainer">
+
+                <h1>
+                    <button class="headLogo" onclick="goMainAdmin()">
+                        <img alt="로고">
+                    </button>
+                </h1>
+
+                <!-- nav 태그 -->
+                <nav>
+                    <div id="menu">
+                        <ul>
+                            <li>
+                                <a href="#" onclick="goEx();">운동법</a></button>
+                            </li>
+                            <li>
+                                <a href="#">건강보조</a>
+                                <ul>
+                                    <li><a href="#" onclick="goEq();">운동장비</a></li>
+                                    <li><a href="#" onclick="goSup();">건강보조식품</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">커뮤니티</a>
+                                <ul>
+                                    <li><a href="#" onclick="goBoard();">자유게시판</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                </nav>
+                <!-- nav 끝 -->
+
+                <a href="#" class="myPage" onclick="goAdminPage();">관리자페이지</a>
+                <a href="#" class="logOut" onclick="logOut();">로그아웃</a>
+
+            </div>
+            <!-- container div 끝 -->
+
+        </header>
+        <!-- header 끝 -->
+
+        <div class="backgroundHeader"></div>
+
+    </body>
+
+</html>

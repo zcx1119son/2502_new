@@ -1,0 +1,159 @@
+header, body {
+    max-width: 1440px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+}
+
+/* slider */
+#bannerAd {
+    width: 600px;
+    height: 450px;
+    margin-top: auto;
+    margin-left: 100px;
+}
+
+/* 이미지가 보이는 영역 */
+.imgSlide {
+    position: relative;
+    width: 750px;
+    height: 450px;
+    overflow: hidden;
+}
+
+/* 전체 이미지를 감싸고 있는 부모 : 움직이는 부분 속성주기 */
+.slideInner {
+    display: flex;
+    flex-wrap: wrap;
+    width: 4500px;
+    height: 450px;
+}
+
+/*개별적인 이미지 (각각의 이미지 설정) */
+.slider {
+    position: relative;
+    width: 750px;
+    height: 450px;
+}
+
+@media(max-width : 800px) {
+    .imgSlide {
+        margin-top: 300px;
+        width: 350px;
+        height: 250px;
+    }
+
+    .slider {
+        width: 350px;
+        height: 250px;
+    }
+
+    .slideBtn a {
+        /* position: absolute; */
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        line-height: 50px;
+        transition: all 0.2s;
+        display: block;
+        color: black;
+    }
+
+    .slideBtn a.prev {
+        margin-top: -65px;
+        margin-left: 370px;
+    }
+
+    .slideBtn a.next {
+        margin-top: -50px;
+        margin-left: 370px;
+    }
+
+}
+
+.slideBtn a {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    transition: all 0.2s;
+    display: block;
+    color: black;
+}
+
+.slideBtn a.prev {
+    margin-top: 50px;
+    margin-left: 250px;
+}
+
+.slideBtn a.next {
+    margin-top: -50px;
+    margin-left: 390px;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 1rem;
+}
+
+.child {
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#loginBtn {
+    display: inline-block;
+    width: 300px;
+    padding: 0.5em 1em;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s;
+}
+#loginBtn:hover {
+    background-color: #005fa3;
+  }
+  
+
+#container {
+    text-align: center;
+}
+
+#container div {
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.mainExercise {
+    margin: 100px;
+    width: 1180px;
+    height: 450px;
+}
+
+.mainExercise img {
+    width: 350px;
+    height: 500px;
+    border-radius: 1rem;
+    margin-left: -1rem;
+}
+
+#userProfile {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    cursor: pointer;
+}

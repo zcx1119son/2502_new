@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>건강보조_리뷰작성</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../css/common/header.css">
+    
+    <link rel="stylesheet" href="../../css/healthcare/review.css">
+  </head>
+
+  <body>
+    <div data-include-path="../includes/header.html"></div>
+    <main>
+      <div>
+        <div class="reviewGoods">
+          <div>단백질 보충제</div>
+          <div>&gt;</div>
+          <div>제품명</div>
+        </div>
+
+        <div class="content">
+          <div class="reviewTitle">
+            <input type="text" placeholder="제목을 입력하세요">
+            <select class="star">
+              <option selected>&#xf005;</option>
+              <option>&#xf005;&#xf005;</option>
+              <option>&#xf005;&#xf005;&#xf005;</option>
+              <option>&#xf005;&#xf005;&#xf005;&#xf005;</option>
+              <option>&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</option>
+            </select>
+          </div>
+
+          <div class="reviewContent">
+            <textarea maxlength="500" placeholder="리뷰 내용을 입력하세요 (최대 500자)"></textarea>
+          </div>
+
+          <div class="reviewBtnContain">
+            <button type="button" onclick="reg();">작성</button>
+            <button type="button" onclick="cancel();">취소</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="../../js/includes/headerImport.js"></script>
+    <script src="../../js/healthcare/commonEq.js"></script>
+  </body>
+
+</html>
+
+
+

@@ -1,0 +1,272 @@
+/* 공통 설정 */
+body,
+html{
+    font-size: 15px;
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    justify-items: center;
+}
+
+/* 탭 컨테이너 */
+.tabs {
+    max-width: 1400px;
+    width: 98%;
+    margin: 50px auto;
+    background-color: #fff;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* 탭 버튼 */
+.tabItem,
+.detailItem {
+    width: 20%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+    background-color: #f1f1f1;
+    border-bottom: 3px solid #333;
+    float: left;
+    transition: background 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+/* 등록 페이지 탭 버튼 */
+.tabRegItem {
+    width: 25%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+    background-color: #f1f1f1;
+    border-bottom: 3px solid #333;
+    float: left;
+    transition: background 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+/* 등록 페이지 탭 버튼 */
+.detailRegItem {
+    width: 20%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+    background-color: #f1f1f1;
+    border-bottom: 3px solid #333;
+    float: left;
+    transition: background 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+/* 탭 호버 */
+.tabItem:hover,
+.detailItem:hover {
+    background-color: #ddd;
+}
+
+/* 등록 페이지 탭 호버 */
+.tabRegItem:hover,
+.detailRegItem:hover {
+    background-color: #ddd;
+}
+
+/* 선택 안한 탭 숨기기 */
+input[name="tabItem"],
+input[name="detailItem"] {
+    display: none;
+}
+
+/* 폼 태그 하위 태그 */
+form input[type="text"],
+form input[type="password"],
+form input[type="email"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 0.6em;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.375rem;
+}
+
+/* 탭 선택 시 스타일 */
+.tabs input:checked+.tabItem,
+.tabs input:checked+.detailItem,
+.tabs input:checked+.tabRegItem,
+.tabs input:checked+.detailRegItem {
+    background-color: #333;
+    color: #fff;
+}
+
+
+/* 탭 내용 */
+.tabContent,
+.detailContent {
+    display: none;
+    clear: both;
+    padding: 30px 40px;
+}
+
+/* 선택시 보여줄 탭 */
+#userM:checked~#userMContent,
+#exM:checked~#exMContent,
+#adM:checked~#adMContent,
+#healthM:checked~#healthMContent,
+#equipmentM:checked~#equipmentContent,
+#chest:checked~#chestContent,
+#back:checked~#backContent,
+#shoulder:checked~#shoulderContent,
+#under:checked~#underContent,
+#abs:checked~#absContent {
+    display: block;
+}
+
+/* 테이블 */
+table {
+    width: 100%;
+    max-width: 1400px;
+    border-collapse: collapse;
+    margin: 30px auto;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* 테이블 하위 설정 */
+th,
+td {
+    padding: 18px 22px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+thead th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+tbody tr:hover {
+    background-color: #f3f3f3;
+}
+
+thead th.pin,
+tbody th {
+    position: sticky;
+    left: 0;
+    background-color: #f8f8f8;
+    z-index: 2;
+}
+
+/* 드롭다운 */
+select {
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+/* 검색 영역 */
+.userSearch {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.userSearch input {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.userSearch button {
+    padding: 7px 12px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    margin-left: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.userSearch button:hover {
+    background-color: #555;
+}
+
+/* 페이징 영역 */
+.paging {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 10px;
+}
+
+.paging i,
+.paging .pages span {
+    cursor: pointer;
+    padding: 6px 10px;
+    font-size: 14px;
+    color: #555;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.paging i:hover,
+.paging .pages span:hover {
+    background-color: #e0e0e0;
+}
+
+.paging .pages .active {
+    color: orangered;
+    font-weight: bold;
+    background-color: #ffe8dc;
+}
+
+.button {
+    /* width: 33em; */
+    display: inline-block;
+    padding: 0.6em 1.2em;
+    background-color: #808080;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+
+.button:hover {
+    background-color: #005fa3;
+}
+
+/* 버튼 설정 */
+.updBtn,
+.regBtn,
+.listBtn,
+.addBtn {
+    width: 15em;
+    display: inline-block;
+    padding: 0.6em 1.2em;
+    margin-bottom: 1.9em;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+}

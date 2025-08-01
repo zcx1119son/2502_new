@@ -1,0 +1,58 @@
+* {
+  font-family: 'Noto Sans KR', sans-serif;
+  list-style: none;
+  text-decoration: none;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+
+body {
+  background-color: #f9f9f9;
+}
+
+footer {
+  background-color: rgb(57, 57, 57);
+  display: flex;
+  margin-top: 200px;
+  max-width: 1400px;
+  width: 100%;
+}
+
+/* rogo ------------------------------------ */
+.rogo {
+  /* background-color: yellow; */
+  flex: 1;
+  text-align: center;
+  padding: 40px 0;
+}
+
+footer h1 {
+  /* background-color: red; */
+  color: #fff;
+}
+
+h1 img {
+  content: url('../../images/common/logo.png');
+}
+
+.rogo > p {
+  color: #fff;
+}
+
+/* text ---------------------------------------- */
+.text {
+  /* background-color: yellowgreen; */
+  padding: 20px;
+  flex: 1;
+  text-align: left;
+}
+
+.text p {
+  color: #fff;
+}
+
+.text strong {
+  color: #fff;
+}

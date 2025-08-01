@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<!-- 관리자 페이지 메인 화면 -->
+
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>관리자 페이지</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="stylesheet" href="../../css/common/header.css">
+        <link rel="stylesheet" href="../../css/admin/admin.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+
+    <body>
+        <!-- 헤더 임포트 -->
+        <div data-include-path="../includes/header_admin.html"></div>
+
+        <!-- 탭 메뉴 -->
+        <div class="tabs">
+            <input id="userM" type="radio" name="tabItem" checked>
+            <label class="tabItem" for="userM">회원관리</label>
+
+            <input id="exM" type="radio" name="tabItem">
+            <label class="tabItem" for="exM">운동법</label>
+
+            <input id="adM" type="radio" name="tabItem">
+            <label class="tabItem" for="adM">배너광고</label>
+
+            <input id="healthM" type="radio" name="tabItem">
+            <label class="tabItem" for="healthM">건강보조식품</label>
+
+            <input id="equipmentM" type="radio" name="tabItem">
+            <label class="tabItem" for="equipmentM">운동기구</label>
+
+            <!-- 회원관리 탭 -->
+            <div class="tabContent" id="userMContent">
+                <div class="users" id="users">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>
+                                    <select name="sort" id="sort">
+                                        <option value="noSort">번호순</option>
+                                        <option value="nameSort">이름순</option>
+                                        <option value="dateSort">가입일자</option>
+                                    </select>
+                                </th>
+                                <th>번호</th>
+                                <th>아이디</th>
+                                <th>전화번호</th>
+                                <th>휴먼계정 여부</th>
+                                <th>탈퇴여부</th>
+                                <th>가입일자</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userList"></tbody>
+                    </table>
+
+                    <div class="paging">
+                        <i class="fa-solid fa-angles-left" id="first_page"></i>
+                        <i class="fa-solid fa-angle-left" id="prev_page"></i>
+
+                        <div class="pages"></div>
+
+                        <i class="fa-solid fa-angle-right" id="next_page"></i>
+                        <i class="fa-solid fa-angles-right" id="last_page"></i>
+
+                    </div>
+                </div>
+                <div class="userSearch">
+                    <input type="text" placeholder="검색">
+                    <button type="button">검색</button>
+                </div>
+
+            </div>
+            <!-- 회원관리 끝 -->
+
+
+            <!-- 운동법 탭 -->
+            <div class="tabContent" id="exMContent">
+                <div class="detailTabs" contenteditable="true">
+                    <form action="#" method="get" id="exChange">
+                        <input id="chest" type="radio" name="detailItem" checked>
+                        <label class="detailItem" for="chest">가슴</label>
+
+                        <input id="back" type="radio" name="detailItem">
+                        <label class="detailItem" for="back">등</label>
+
+                        <input id="shoulder" type="radio" name="detailItem">
+                        <label class="detailItem" for="shoulder">어깨</label>
+
+                        <input id="under" type="radio" name="detailItem">
+                        <label class="detailItem" for="under">하체</label>
+
+                        <input id="abs" type="radio" name="detailItem">
+                        <label class="detailItem" for="abs">복근</label>
+
+                        <div class="detailContent" id="chestContent">
+
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>운동 이름</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="chestTableBody" onclick="goDetailEx();"></tbody>
+                            </table>
+
+                            <div class="paging" id="chestPaging">
+                                <i class="fa-solid fa-angles-left" onclick="goFirst('chest')"></i>
+                                <i class="fa-solid fa-angle-left" onclick="goPrev('chest')"></i>
+                                <div class="pages" id="chestPages"></div>
+                                <i class="fa-solid fa-angle-right" onclick="goNext('chest')"></i>
+                                <i class="fa-solid fa-angles-right" onclick="goLast('chest')"></i>
+                            </div>
+
+                        </div>
+
+                        <div class="detailContent" id="backContent">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>운동 이름</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="backTableBody" onclick="goDetailEx();"></tbody>
+                            </table>
+                            <div class="paging" id="backPaging">
+                                <i class="fa-solid fa-angles-left" onclick="goFirst('back')"></i>
+                                <i class="fa-solid fa-angle-left" onclick="goPrev('back')"></i>
+                                <div class="pages" id="backPages"></div>
+                                <i class="fa-solid fa-angle-right" onclick="goNext('back')"></i>
+                                <i class="fa-solid fa-angles-right" onclick="goLast('back')"></i>
+                            </div>
+                        </div>
+
+                        <div class="detailContent" id="shoulderContent">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>운동 이름</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="shoulderTableBody" onclick="goDetailEx();"></tbody>
+                            </table>
+                            <div class="paging" id="shoulderPaging">
+                                <i class="fa-solid fa-angles-left" onclick="goFirst('shoulder')"></i>
+                                <i class="fa-solid fa-angle-left" onclick="goPrev('shoulder')"></i>
+                                <div class="pages" id="shoulderPages"></div>
+                                <i class="fa-solid fa-angle-right" onclick="goNext('shoulder')"></i>
+                                <i class="fa-solid fa-angles-right" onclick="goLast('shoulder')"></i>
+                            </div>
+                        </div>
+
+                        <div class="detailContent" id="underContent">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>운동 이름</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="underTableBody" onclick="goDetailEx();"></tbody>
+                            </table>
+                            <div class="paging" id="underPaging">
+                                <i class="fa-solid fa-angles-left" onclick="goFirst('under')"></i>
+                                <i class="fa-solid fa-angle-left" onclick="goPrev('under')"></i>
+                                <div class="pages" id="underPages"></div>
+                                <i class="fa-solid fa-angle-right" onclick="goNext('under')"></i>
+                                <i class="fa-solid fa-angles-right" onclick="goLast('under')"></i>
+                            </div>
+                        </div>
+
+                        <div class="detailContent" id="absContent">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>운동 이름</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="absTableBody" onclick="goDetailEx();"></tbody>
+                            </table>
+                            <div class="paging" id="absPaging">
+                                <i class="fa-solid fa-angles-left" onclick="goFirst('abs')"></i>
+                                <i class="fa-solid fa-angle-left" onclick="goPrev('abs')"></i>
+                                <div class="pages" id="absPages"></div>
+                                <i class="fa-solid fa-angle-right" onclick="goNext('abs')"></i>
+                                <i class="fa-solid fa-angles-right" onclick="goLast('abs')"></i>
+                            </div>
+                        </div>
+                </div>
+                <!-- 운동법 세부 탭 끝 -->
+                </form>
+                <!-- 운동법 form 종료 -->
+
+                <div class="userSearch">
+                    <input type="text" placeholder="검색">
+                    <button type="button">검색</button>
+                </div>
+
+
+            </div>
+            <!-- 운동법 전체 끝 -->
+
+            <!-- 광고 탭 -->
+            <div class="tabContent" id="adMContent">
+                <div class="ad" id="ad">
+                    <form action="#" method="get">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>번호</th>
+                                    <th>광고명</th>
+                                    <th>광고링크</th>
+                                    <th>적용 여부</th>
+                                    <th>삭제</th>
+                                    <th>게시일자</th>
+                                    <th>마감일자</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adContent"></tbody>
+                        </table>
+                        <!-- 페이징 처리 영역 -->
+                        <div class="paging">
+                            <i class="fa-solid fa-angles-left" id="first_page"></i>
+                            <i class="fa-solid fa-angle-left" id="prev_page"></i>
+
+                            <div class="pages"></div>
+
+                            <i class="fa-solid fa-angle-right" id="next_page"></i>
+                            <i class="fa-solid fa-angles-right" id="last_page"></i>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="userSearch">
+                    <input type="text" placeholder="검색">
+                    <button type="button">검색</button>
+                </div>
+
+            </div>
+            <!-- 광고 탭 끝 -->
+
+            <!-- 보충제, 영양제 탭 -->
+            <div class="tabContent" id="healthMContent">
+                <div class="supplement" id="supplement">
+                    <form action="#" method="get">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>상품 이미지</th>
+                                    <th>상세설명 / URL</th>
+                                    <th>게시여부</th>
+                                    <th>등록일자</th>
+                                    <th>게시일자</th>
+                                </tr>
+                            </thead>
+                            <tbody id="supplementData"></tbody>
+                        </table>
+                    </form>
+
+                    <!-- 페이징 처리 영역 -->
+                    <div class="paging">
+                        <i class="fa-solid fa-angles-left" id="first_page"></i>
+                        <i class="fa-solid fa-angle-left" id="prev_page"></i>
+
+                        <div class="pages"></div>
+
+                        <i class="fa-solid fa-angle-right" id="next_page"></i>
+                        <i class="fa-solid fa-angles-right" id="last_page"></i>
+                    </div>
+                </div>
+                <div class="userSearch">
+                    <input type="text" placeholder="검색">
+                    <button type="button">검색</button>
+                </div>
+            </div>
+
+            <!-- 운동 기구 탭 -->
+            <div class="tabContent" id="equipmentContent">
+                <div class="equipment" id="equipment">
+                    <form action="#" method="get">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>상품 이미지</th>
+                                    <th>상세설명 / URL</th>
+                                    <th>게시여부</th>
+                                    <th>등록일자</th>
+                                    <th>게시일자</th>
+                                </tr>
+                            </thead>
+                            <tbody id="eqData"></tbody>
+                        </table>
+
+                    </form>
+                    <!-- 페이징 처리 영역 -->
+                    <div class="paging">
+                        <i class="fa-solid fa-angles-left" id="first_page"></i>
+                        <i class="fa-solid fa-angle-left" id="prev_page"></i>
+
+                        <div class="pages"></div>
+
+                        <i class="fa-solid fa-angle-right" id="next_page"></i>
+                        <i class="fa-solid fa-angles-right" id="last_page"></i>
+                    </div>
+                </div>
+                <div class="userSearch">
+                    <input type="text" placeholder="검색">
+                    <button type="button">검색</button>
+                </div>
+
+            </div>
+
+            <button type="button" class="updBtn" onclick="updateCheck();">수정하기</button>
+            <button type="button" class="regBtn" onclick="goReg();">등록 페이지로</button>
+        </div>
+
+    </body>
+    <script src="../../js/includes/headerImport.js"></script>
+    <script src="../../js/admin/commonAdmin.js"></script>
+
+</html>

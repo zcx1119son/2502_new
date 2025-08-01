@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>건강보조_보조식품</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../../css/common/header.css">
+  <link rel="stylesheet" href="../../css/healthcare/suplement.css">
+</head>
+
+<body>
+  <div data-include-path="../includes/header.html"></div>
+
+  <!-- 탭 메뉴 -->
+  <div class="tabs">
+    <input id="protein" type="radio" name="tabItem" checked>
+    <label class="tabItem" for="protein">단백질 보충제</label>
+
+    <input id="supplement" type="radio" name="tabItem">
+    <label class="tabItem" for="supplement">영양제</label>
+
+    <div class="tabContent" id="proteinContent">
+      <table id="proteinTable"></table>
+      <div class="userSearch">
+        <input type="text" placeholder="검색">
+        <button type="button">검색</button>
+      </div>
+      <div class="paging" id="proteinPaging">
+        <i class="fa-solid fa-angles-left" id="first_page_protein"></i>
+        <i class="fa-solid fa-angle-left" id="prev_page_protein"></i>
+        <div class="pages" id="proteinPages"></div>
+        <i class="fa-solid fa-angle-right" id="next_page_protein"></i>
+        <i class="fa-solid fa-angles-right" id="last_page_protein"></i>
+      </div>
+    </div>
+
+    <div class="tabContent" id="supplementContent">
+      <table id="supplementTable"></table>
+      <div class="userSearch">
+        <input type="text" placeholder="검색">
+        <button type="button">검색</button>
+      </div>
+      <div class="paging" id="supplementPaging">
+        <i class="fa-solid fa-angles-left" id="first_page_supplement"></i>
+        <i class="fa-solid fa-angle-left" id="prev_page_supplement"></i>
+        <div class="pages" id="supplementPages"></div>
+        <i class="fa-solid fa-angle-right" id="next_page_supplement"></i>
+        <i class="fa-solid fa-angles-right" id="last_page_supplement"></i>
+      </div>
+    </div>
+  </div>
+
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="../../js/includes/headerImport.js"></script>
+  <script src="../../js/healthcare/goPageSupplement.js"></script>
+  <script src="../../js/healthcare/rev.js"></script>
+</body>
+
+</html>

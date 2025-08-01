@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <meta charset="UTF-8" />
+        <title>마이페이지 - 회원정보</title>
+        <link rel="stylesheet" href="../../css/user/userUpdate.css">
+        <link rel="stylesheet" href="../../css/common/header.css">
+        <link rel="stylesheet" href="../../css/common/backgroundHeader.css">
+        <link rel="stylesheet" href="../../css/user/userUpdate.css">
+    </head>
+
+    <body>
+        <div data-include-path="../includes/header.html"></div>
+        <div data-include-path="../includes/backgroundHeader.html"></div>
+
+        <h1>기본정보</h1>
+        <div class="info-box">
+            <div class="info-row"><span class="label">이름</span><input class="input" type="text" value="홍길동" readonly></div>
+            <div class="info-row"><span class="label">성별</span><input class="input" type="text" value="남자" readonly></div>
+            <div class="info-row"><span class="label">생년월일</span><input class="input" type="text" value="87/01/23" readonly>
+            </div>
+            <div class="info-row"><span class="label">아이디</span><input class="input" type="text" value="hong1234" readonly>
+            </div>
+            <div class="info-row"><span class="label">비밀번호</span><input class="input" type="password"
+                    placeholder="변경시에만 입력해주세요"></div>
+            <div class="info-row"><span class="label">연락처</span><input class="input" type="text" value="010-****-1234">
+            </div>
+            <div class="info-row"><span class="label">주소</span><input class="input" type="text" placeholder="주소 입력란"></div>
+            <div class="info-row"><span class="label">질병</span><input class="input" type="text" placeholder="질병명 등록"></div>
+            <div>
+                <button class="btn" onclick="updateUser()">수정하기</button>
+                <button class="btn" onclick="goBack()">뒤로가기</button>
+            </div>
+        </div>
+        <script>
+            function goBack() {
+                history.back();
+            }
+
+            
+            function updateUser() {
+                alert('수정 되었습니다.');
+                history.back();
+            }
+
+
+        </script>
+        <script src="../../js/includes/headerImport.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="../../js/user/myPage.js"></script>
+    </body>
+
+</html>

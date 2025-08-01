@@ -1,0 +1,204 @@
+ /* 공통 설정 */
+ body {
+    width: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    justify-items: center;
+}
+
+/* 탭 컨테이너 */
+.tabs {
+    max-width: 1400px;
+    background-color: #fff;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    width: 98%;
+    margin: 3% auto;
+}
+
+/* 탭 버튼 */
+.tabItem {
+    margin: 5% 15%;
+    width: 70%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+    background-color: #f1f1f1;
+    border-bottom: 3px solid #333;
+    float: left;
+    transition: background 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+}
+
+.detailItem {
+    width: 20%;
+    height: 50px;
+    line-height: 50px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+    background-color: #f1f1f1;
+    border-bottom: 3px solid #333;
+    float: left;
+    transition: background 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    margin-top: 1%;
+}
+
+/* 탭 호버 */
+.tabItem:hover,
+.detailItem:hover {
+    background-color: #ddd;
+}
+
+/* 선택 안한 탭 숨기기 */
+input[name="tabItem"],
+input[name="detailItem"] {
+    display: none;
+}
+/* 탭 선택 시 스타일 */
+.tabs input:checked+.tabItem,
+.tabs input:checked+.detailItem {
+    background-color: #333;
+    color: #fff;
+}
+
+/* 탭 내용 */
+.tabContent,
+.detailContent {
+    display: none;
+    clear: both;
+    padding: 30px 40px;
+}
+
+/* 선택시 보여줄 탭 */
+#exM:checked~#exMContent,
+#adM:checked~#adMContent,
+#chest:checked~#chestContent,
+#back:checked~#backContent,
+#shoulder:checked~#shoulderContent,
+#under:checked~#underContent,
+#abs:checked~#absContent {
+    display: block;
+}
+
+/* 테이블 */
+table {
+    width: 98%;
+    max-width: 1380px;
+    border-collapse: collapse;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* 테이블 하위 설정 */
+th,
+td {
+    width: 10%;
+    padding: 1%;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+thead th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+th:hover {
+   cursor: pointer;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+tbody tr:hover {
+    background-color: #f3f3f3;
+}
+
+thead th.pin,
+tbody th {
+    position: sticky;
+    left: 0;
+    background-color: #f8f8f8;
+    z-index: 2;
+}
+
+/* 검색 영역 */
+.userSearch {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.userSearch input {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.userSearch button {
+    padding: 7px 12px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    margin-left: 5px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.userSearch button:hover {
+    background-color: #555;
+}
+
+/* 페이징 영역 */
+.paging {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 10px;
+}
+
+.paging i,
+.paging .pages span {
+    cursor: pointer;
+    padding: 6px 10px;
+    font-size: 14px;
+    color: #555;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.paging i:hover,
+.paging .pages span:hover {
+    background-color: #e0e0e0;
+}
+
+.paging .pages .active {
+    color: orangered;
+    font-weight: bold;
+    background-color: #ffe8dc;
+}
+
+.button {
+    /* width: 33em; */
+    display: inline-block;
+    padding: 0.6em 1.2em;
+    background-color: #808080;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+}

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <title>운동법 메인페이지</title>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel="stylesheet" href="../../css/common/header.css">
+        <link rel="stylesheet" href="../../css/exercise/exMet.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+
+    <body>
+        <!-- 헤더 임포트 -->
+        <div data-include-path="../includes/header.html"></div>
+
+        <!-- 탭 메뉴 -->
+        <div class="tabs">
+
+            <input id="exM" type="radio" name="tabItem" checked>
+            <label class="tabItem" for="exM">운동법</label>
+
+            <!-- 운동법 탭 -->
+            <div class="tabContent" id="exMContent">
+                <div class="detailTabs">
+                    <form action="#" method="get" id="exChange">
+                        <input id="chest" type="radio" name="detailItem" checked>
+                        <label class="detailItem" for="chest">가슴</label>
+
+                        <input id="back" type="radio" name="detailItem">
+                        <label class="detailItem" for="back">등</label>
+
+                        <input id="shoulder" type="radio" name="detailItem">
+                        <label class="detailItem" for="shoulder">어깨</label>
+
+                        <input id="under" type="radio" name="detailItem">
+                        <label class="detailItem" for="under">하체</label>
+
+                        <input id="abs" type="radio" name="detailItem">
+                        <label class="detailItem" for="abs">복근</label>
+
+                        <!-- 가슴 -->
+                        <div class="detailContent" id="chestContent">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>운동 이름</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="chestTableBody" onclick="goDetailEx();"></tbody>
+                            </table>
+                            <div class="paging" id="chestPaging">
+                                <i class="fa-solid fa-angles-left" onclick="goFirst('chest')"></i>
+                                <i class="fa-solid fa-angle-left" onclick="goPrev('chest')"></i>
+                                <div class="pages" id="chestPages"></div>
+                                <i class="fa-solid fa-angle-right" onclick="goNext('chest')"></i>
+                                <i class="fa-solid fa-angles-right" onclick="goLast('chest')"></i>
+                            </div>
+                        </div>
+
+                        <!-- 등 -->
+                        <div class="detailContent" id="backContent">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>운동 이름</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="backTableBody" onclick="goDetailEx();"></tbody>
+                            </table>
+                            <div class="paging" id="backPaging">
+                                <i class="fa-solid fa-angles-left" onclick="goFirst('back')"></i>
+                                <i class="fa-solid fa-angle-left" onclick="goPrev('back')"></i>
+                                <div class="pages" id="backPages"></div>
+                                <i class="fa-solid fa-angle-right" onclick="goNext('back')"></i>
+                                <i class="fa-solid fa-angles-right" onclick="goLast('back')"></i>
+                            </div>
+                        </div>
+
+                        <!-- 어깨 -->
+                        <div class="detailContent" id="shoulderContent">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>운동 이름</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="shoulderTableBody" onclick="goDetailEx();"></tbody>
+                            </table>
+                            <div class="paging" id="shoulderPaging">
+                                <i class="fa-solid fa-angles-left" onclick="goFirst('shoulder')"></i>
+                                <i class="fa-solid fa-angle-left" onclick="goPrev('shoulder')"></i>
+                                <div class="pages" id="shoulderPages"></div>
+                                <i class="fa-solid fa-angle-right" onclick="goNext('shoulder')"></i>
+                                <i class="fa-solid fa-angles-right" onclick="goLast('shoulder')"></i>
+                            </div>
+                        </div>
+
+                        <!-- 하체 -->
+                        <div class="detailContent" id="underContent">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>운동 이름</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="underTableBody" onclick="goDetailEx();"></tbody>
+                            </table>
+                            <div class="paging" id="underPaging">
+                                <i class="fa-solid fa-angles-left" onclick="goFirst('under')"></i>
+                                <i class="fa-solid fa-angle-left" onclick="goPrev('under')"></i>
+                                <div class="pages" id="underPages"></div>
+                                <i class="fa-solid fa-angle-right" onclick="goNext('under')"></i>
+                                <i class="fa-solid fa-angles-right" onclick="goLast('under')"></i>
+                            </div>
+                        </div>
+
+                        <!-- 복근 -->
+                        <div class="detailContent" id="absContent">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>운동 이름</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="absTableBody" onclick="goDetailEx();"></tbody>
+                            </table>
+                            <div class="paging" id="absPaging">
+                                <i class="fa-solid fa-angles-left" onclick="goFirst('abs')"></i>
+                                <i class="fa-solid fa-angle-left" onclick="goPrev('abs')"></i>
+                                <div class="pages" id="absPages"></div>
+                                <i class="fa-solid fa-angle-right" onclick="goNext('abs')"></i>
+                                <i class="fa-solid fa-angles-right" onclick="goLast('abs')"></i>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- 운동법 form 종료 -->
+
+                    <div class="userSearch">
+                        <input type="text" placeholder="검색">
+                        <button type="button">검색</button>
+                    </div>
+                </div>
+                <!-- 운동법 세부 탭 끝 -->
+            </div>
+            <script src="../../js/includes/headerImport.js"></script>
+            <script src="../../js/exercise/execriseCommon.js"></script>
+            <script src="../../js/exercise/exMet.js"></script>
+    </body>
+
+</html>

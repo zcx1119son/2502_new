@@ -1,0 +1,119 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #f9f9f9;;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 30px auto;
+}
+
+.search-bar select,
+.search-bar input[type="text"],
+.search-bar button {
+    padding: 10px;
+    font-size: 14px;
+}
+
+.search-bar button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.product-grid {
+    width: 30%;
+    /* 3열 그리드 */
+    padding: 1rem;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    margin-bottom: 50px;
+    box-sizing: border-box;
+}
+
+.product-card {
+    text-align: center;
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+/* 페이지 처리 영역 */
+div.paging {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    margin-top: 5px;
+    justify-content: center;
+}
+
+div.paging>i,
+div.paging>div.pages {
+    margin: 0 10px;
+}
+
+div.paging>i,
+div.paging>div.pages>span {
+    margin: 0 3px;
+    cursor: pointer;
+}
+
+span.active {
+    color: orangered;
+    font-weight: bold;
+}
+
+/* ===== BUTTON ===== */
+.button, #loginButton, #backBtn {
+    /* 두줄추가 */
+    margin: 10% auto;
+    width: 90%;
+    display: inline-block;
+    padding: 0.6em 1.2em;
+    margin-bottom: 1.9em;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: center;
+}
+/* 추가 */
+.info div{
+    margin-top: 10%;
+}
+
+.info h3{
+    padding: 3%;
+}
+.info p{
+    padding: 2%;
+}
+
+.paging {
+    position: relative;
+    top: -20px; /* 페이징 영역을 위로 20px 올립니다 */
+}

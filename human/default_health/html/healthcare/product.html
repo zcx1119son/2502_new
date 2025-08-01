@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>건강보조_공통상품</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../../css/common/header.css">
+    <link rel="stylesheet" href="../../css/admin/admin.css">
+    <link rel="stylesheet" href="../../css/healthcare/product.css">
+
+</head>
+
+<body>
+    <div data-include-path="../includes/header.html"></div>
+
+    <!-- 건강보조 식품 상세 페이지 -->
+    <div class="product-section-supplement" id="product-section-supplement">
+        <div class="product-box">
+            <div class="product-image">
+                <img src="../../images/supplements/Protein1.jpg" alt="">
+            </div>
+            <div class="purchase-info">
+                <h2>밸런스 파워쉐이크 아이솔레이트 <br>초코맛</h2>
+                <p>동물성&식물성 단백질의 조합</p>
+                <p>단백질 28g = 달걀 4개 분량과 비슷한 단백질 함량!</p>
+                <p>네덜란드산 코코아 분말로 사용해 진한 초코우유맛</p>
+                <p>Non-GMO 대두로만 생산</p>
+                <p><button class="siteLink" onclick="siteLink();">구매 바로 가기 </button></p>
+            </div>
+        </div>
+
+        <h2 class="section-title">고객 리뷰</h2>
+
+        <div class="buttondiv">
+            <div class="button-wrapper">
+                <button class="write-review-btn" onclick="regRiv();">리뷰 작성</button>
+            </div>
+        </div>
+
+        <table class="review-table">
+            <thead>
+                <tr>
+                    <td>작성자</td>
+                    <td>리뷰내용</td>
+                    <td>별점</td>
+                    <td>신고</td>
+                </tr>
+            </thead>
+            <!-- <tbody>
+                <tr>
+                    <td>김종국</td>
+                    <td>잘먹고 오늘도 득근하러 갑니다.</td>
+                    <td class="star">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</td>
+                    <td>
+                        <button class="sirenLogo" onclick="clickDeclaration(this);">
+                            <img src="../../images/sirenLogo.png" width="50">
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>엄정민</td>
+                    <td>초코우유 먹는거 같아요.</td>
+                    <td class="star">&#xf005;&#xf005;&#xf005;&#xf005;&#xf005;</td>
+                    <td>
+                        <button class="sirenLogo" onclick="clickDeclaration(this);"><img
+                                src="../../images/sirenLogo.png" width="50"></button>
+                    </td>
+                </tr>
+            </tbody> -->
+            <tbody id="reviewBodySupplement"></tbody>
+        </table>
+
+        <!-- 페이징 처리 영역 -->
+        <div class="paging">
+
+            <!-- 이미지 임포트 -->
+            <i class="fa-solid fa-angles-left" id="first_page"></i>
+            <i class="fa-solid fa-angle-left" id="prev_page"></i>
+
+            <div class="pages">
+                <span class="active">1</span>
+                <span>2</span>
+                <span>3</span>
+                <span>4</span>
+                <span>5</span>
+                <span>...(더보기)</span>
+            </div>
+
+            <i class="fa-solid fa-angle-right" id="next_page"></i>
+            <i class="fa-solid fa-angles-right" id="last_page"></i>
+        </div>
+
+    </div>
+    <!-- 건강보조 식품 상세 페이지 끝 -->
+
+    <!-- 운동 기구 상세 페이지 -->
+    <div class="product-section-equipment" id="product-section-equipment">
+        <div class="product-box">
+            <div class="product-image">
+                <img src="../../images/equipments/KneePads.jpg" alt="무릎보호대" style="width: 650px;">
+            </div>
+            <div class="purchase-info">
+                <h2>제로투히어로 네오프렌 하이브리드 파워리프팅 무릎보호대 양쪽 세트</h2>
+                <p>사용부위: 무릎</p>
+                <p>사이즈: XXL이상</p>
+                <p>착용방향: 좌우겸용</p>
+                <p>용도: 스포츠/레저용</p>
+                <p>사용대상: 일반/성인</p>
+                <p><button class="siteLink" onclick="siteLinkProduct();">구매 바로 가기</button></p>
+            </div>
+        </div>
+
+        <h2 class="section-title">고객 리뷰</h2>
+
+        <div class="buttondiv">
+            <div class="button-wrapper">
+                <button class="write-review-btn" onclick="regRiv();">리뷰 작성</button>
+            </div>
+        </div>
+
+        <table class="review-table">
+            <thead>
+                <tr>
+                    <td>작성자</td>
+                    <td>리뷰내용</td>
+                    <td>별점</td>
+                    <td>신고</td>
+                </tr>
+            </thead>
+            <tbody id="reviewBodyEquipment"></tbody>
+        </table>
+        <!-- 페이징 처리 영역 -->
+
+        <div class="paging">
+            <i class="fa-solid fa-angles-left" id="first_page"></i>
+            <i class="fa-solid fa-angle-left" id="prev_page"></i>
+    
+            <div class="pages"></div>
+    
+            <i class="fa-solid fa-angle-right" id="next_page"></i>
+            <i class="fa-solid fa-angles-right" id="last_page"></i>
+        </div>
+    </div>
+    <!-- 운동 기구 상세 페이지 끝 -->  
+
+    <!-- JQuery를 사용하기 위함 -->
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="../../js/includes/headerImport.js"></script>
+    <script src="../../js/healthcare/commonEq.js"></script>
+    <script src="../../js/healthcare/rev.js"></script>
+</body>
+
+</html>
