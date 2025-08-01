@@ -1,0 +1,175 @@
+/* src/pages/AdditionalInfoModal.css */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* 모달 컨텐츠 전체 스타일 */
+.modal-content {
+    background: #fff;
+    padding: 30px; /* 내부 패딩 */
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 400px; /* 모달 너비 고정 */
+    max-width: 90vw; /* 모바일 대응 */
+    
+    display: flex;
+    flex-direction: column;
+    gap: 0; /* 각 form-group의 margin-bottom으로 간격 제어 */
+    box-sizing: border-box;
+}
+
+/* 모달 제목 */
+.modal-content h3 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin: 0 0 25px 0; /* 제목 아래 여백 */
+    line-height: 1.2;
+}
+
+/* 🔧 입력 필드 그룹 - 레이블과 입력창을 한 줄에 배치 */
+.form-group {
+    display: flex; /* 🚨🚨🚨 flexbox로 설정 🚨🚨🚨 */
+    flex-direction: row; /* 🚨🚨🚨 요소를 가로로 배치 🚨🚨🚨 */
+    align-items: center; /* 세로 중앙 정렬 */
+    width: 100%;
+    
+    /* 레이블과 입력창 사이의 간격 */
+    gap: 15px; /* 🚨🚨🚨 레이블과 인풋 사이 간격 (식당등록 페이지와 유사하게) 🚨🚨🚨 */
+    
+    /* form-group 자체의 하단 마진으로 다음 form-group과의 간격 조절 */
+    margin-bottom: 20px; 
+    padding: 0; 
+}
+
+/* 마지막 form-group은 하단 마진 제거 */
+.form-group:last-of-type {
+    margin-bottom: 0; 
+}
+
+/* 레이블 스타일 - 너비 지정 */
+.form-label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #555;
+    white-space: nowrap;
+    
+    /* 🚨🚨🚨 레이블의 너비를 고정하거나 비율로 조절 🚨🚨🚨 */
+    width: 90px; /* 예시: 레이블 너비 고정. 필요에 따라 조절. */
+    flex-shrink: 0; /* 레이블이 줄어들지 않도록 */
+    
+    margin: 0; 
+    padding: 0; 
+    line-height: 1.2; 
+}
+
+/* 입력 필드 스타일 - 남은 공간을 채우도록 */
+.form-input {
+    flex-grow: 1; /* 🚨🚨🚨 남은 공간을 모두 차지하도록 설정 🚨🚨🚨 */
+    width: auto; /* flex-grow가 작동하도록 auto로 설정 */
+    
+    padding: 12px 14px; 
+    height: 44px; 
+    min-height: unset; 
+    
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.form-input:focus {
+    border-color: #6a1b9a; 
+    outline: none;
+}
+
+/* 🔘 버튼 영역 */
+.modal-buttons {
+    display: flex;
+    justify-content: center; 
+    gap: 12px; 
+    margin-top: 30px; 
+    width: 100%; 
+}
+
+.modal-buttons button {
+    flex: 1; 
+    max-width: 150px; 
+    min-width: 100px; 
+    padding: 12px 25px; 
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.confirm-button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.confirm-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+.cancel-button {
+    background-color: #f0f0f0;
+    color: #555;
+    border: 1px solid #ccc;
+}
+
+.cancel-button:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-1px);
+}
+
+/* 📱 모바일 대응 - 가로 배치가 좁을 경우 세로로 전환 */
+@media (max-width: 480px) {
+    .modal-content { 
+        padding: 20px; 
+        max-width: 95vw; 
+        width: 95vw; 
+    }
+
+    .form-group {
+        flex-direction: column; /* 🚨🚨🚨 모바일에서는 세로로 다시 배치 🚨🚨🚨 */
+        align-items: flex-start; /* 왼쪽 정렬 */
+        gap: 6px; /* 레이블-인풋 사이 간격 다시 조절 */
+        margin-bottom: 15px; 
+    }
+
+    .form-label {
+        width: auto; /* 모바일에서 레이블 너비 고정 해제 */
+    }
+
+    .form-input {
+        width: 100%; /* 모바일에서 인풋 100% 너비 */
+        padding: 10px 12px; 
+        height: 40px; 
+    }
+
+    .modal-buttons {
+        flex-direction: column; 
+        margin-top: 25px; 
+    }
+
+    .modal-buttons button {
+        width: 100%; 
+        max-width: unset; 
+    }
+}

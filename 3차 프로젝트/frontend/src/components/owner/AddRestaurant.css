@@ -1,0 +1,271 @@
+.register-restaurant-container {
+    width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.page-title {
+    display: block;
+    text-align: center;
+    margin: 0 auto 30px auto;
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center; /* 라벨과 인풋을 세로 중앙 정렬 */
+    gap: 10px; /* 라벨과 인풋 사이 간격 */
+}
+
+.form-label {
+    flex: 0 0 120px; /* 라벨 너비 고정 */
+    font-weight: bold;
+    color: #555;
+    font-size: 1.1em;
+    white-space: nowrap; /* 라벨 텍스트가 잘리지 않도록 */
+}
+
+.form-input,
+.form-select { /* 🚨 form-select 추가 */
+    flex-grow: 1; /* 남은 공간을 채우도록 확장 */
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    min-width: 0; /* 🚨 추가: flex 아이템의 최소 너비 재설정 (글자 잘림 방지) */
+    box-sizing: border-box; /* 🚨 추가: padding과 border가 width에 포함되도록 */
+    height: 44px; /* 🚨 높이 일관성 유지 */
+}
+
+.form-input:focus,
+.form-select:focus { /* 🚨 form-select 추가 */
+    border-color: #6a1b9a; /* 보라색 계열 */
+    box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+    outline: none;
+}
+
+.check-button, .edit-button {
+    background-color: #007bff;
+    color: #333333; /* 진한 회색 텍스트 */
+    border: 1px solid #b3b3b3; /* 테두리도 회색 */
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0; /* 내용이 줄어들지 않도록 함 */
+    height: 44px; /* � 높이 일관성 유지 */
+    box-sizing: border-box;
+}
+
+.check-button {
+    background-color: #0056b3;
+    color: white;
+}
+
+.check-button:hover:not(:disabled) {
+    background-color: #999999; /* 호버 시 약간 더 진하게 */
+}
+
+.check-button:disabled {
+    background-color: #e0e0e0;
+    color: #a0a0a0;
+    cursor: not-allowed;
+}
+
+.edit-button {
+    background-color: #007bff;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+.message {
+    margin-top: -10px; /* 인풋과 메시지 사이 간격 조정 */
+    margin-bottom: 15px;
+    padding-left: 130px; /* 라벨 너비만큼 들여쓰기 */
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+.message.success {
+    color: #28a745; /* 녹색 */
+}
+
+.message.error {
+    color: #dc3545; /* 빨간색 */
+}
+
+/* 파일 업로드 그룹 */
+.file-upload-group {
+    align-items: center;
+}
+
+.file-input-wrapper {
+    position: relative;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    overflow: hidden;
+    height: 44px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+/* 파일 선택 버튼 스타일 (가상 요소) */
+.file-input-wrapper::before {
+    content: '파일 선택';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e9e9e9;
+    color: #555;
+    padding: 12px 15px;
+    border-right: 1px solid #ddd;
+    border-radius: 6px 0 0 6px;
+    cursor: pointer;
+    font-size: 1em;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+    height: 100%;
+    box-sizing: border-box;
+    flex-shrink: 0;
+}
+
+.file-input-wrapper:hover::before {
+    background-color: #dcdcdc;
+}
+
+.file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.selected-file-name {
+    padding: 0 15px;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    line-height: 1;
+}
+
+/* ⭐ 이미지 미리보기 컨테이너 스타일 (수정) ⭐ */
+.image-preview-container {
+    /* max-width: 500px; 이 값은 유지하되, 이미지 자체가 이 안에서 조절되도록 */
+    /* max-height: 500px; 이 값도 유지 */
+    margin-top: 20px; /* 파일 입력 필드와 미리보기 사이 간격 */
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    overflow: hidden; /* 이미지가 컨테이너를 벗어나지 않도록 */
+    display: flex; /* 이미지를 중앙에 배치하기 위해 */
+    justify-content: center;
+    align-items: center;
+    /* height: 250px; /* 미리보기 컨테이너의 고정 높이를 설정하여 레이아웃 흔들림 방지 (선택 사항) */
+    /* flex-shrink: 0; /* 컨테이너가 줄어들지 않도록 */
+}
+
+/* ⭐ 실제 이미지 태그 스타일 (핵심 수정) ⭐ */
+.restaurant-image-preview {
+    max-width: 100%; /* ⭐ 컨테이너 너비에 맞춰 최대 너비 설정 ⭐ */
+    max-height: 300px; /* ⭐ 이미지의 최대 높이 설정 (원하는 크기로 조절) ⭐ */
+    height: auto;      /* ⭐ 가로세로 비율 유지 ⭐ */
+    display: block;    /* 이미지 하단 여백 제거 및 중앙 정렬을 위해 */
+    margin: 0 auto;    /* 이미지를 컨테이너 중앙에 배치 */
+    border-radius: 5px; /* 이미지 자체의 모서리 둥글게 */
+    object-fit: contain; /* 이미지가 잘리지 않고 컨테이너에 맞게 조절되도록 */
+}
+
+
+/* 완료 버튼 스타일 */
+.submit-button {
+    width: 100%;
+    padding: 15px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.arrow-icon {
+    margin-left: 10px;
+    font-size: 1.2em;
+}
+
+/* 라디오 버튼 그룹 */
+.radio-group {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.radio-group .form-label {
+    margin-bottom: 0;
+    margin-right: 20px;
+    white-space: nowrap;
+    text-align: left;
+    width: auto;
+    flex-shrink: unset;
+}
+
+.radio-options {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #333;
+    cursor: pointer;
+    height: 44px;
+}
+
+.radio-label input[type="radio"] {
+    margin-right: 8px;
+    transform: scale(1.2);
+}

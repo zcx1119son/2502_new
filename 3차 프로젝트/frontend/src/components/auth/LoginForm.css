@@ -1,0 +1,166 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #fff;
+}
+
+.home-btn {
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  background: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-btn {
+  background: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.login-btn:hover{
+  background-color: #0056b3;
+}
+
+.container {
+  display: flex;
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 0 40px;
+}
+
+.sidebar {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 14px;
+  color: #666;
+  margin-top: 30px;
+}
+
+.sidebar .active {
+  font-weight: bold;
+  color: black;
+}
+
+.sidebar a {
+  color: #666;
+  text-decoration: none;
+}
+
+.login-form {
+  width: 70%;
+  padding-left: 40px;
+}
+
+.login-form h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.login-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.login-form label {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.login-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 100%;
+}
+
+.password-wrap {
+  position: relative;
+}
+
+.submit-btn {
+  background-color: #999;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.kakao-btn {
+    background-color: #FEE500; /* 카카오 노란색 */
+    color: #3C1E1E; /* 카카오 텍스트 색상 */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex; /* 이미지와 텍스트를 한 줄에 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    gap: 10px; /* 이미지와 텍스트 사이 간격 */
+    width: 100%; /* 너비를 꽉 채우도록 */
+    margin-top: 15px; /* 위쪽 여백 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.kakao-btn:hover {
+    background-color: #FADA00; /* 호버 시 약간 더 진한 노란색 */
+}
+
+.kakao-btn img {
+    width: 24px; /* 카카오 로고 이미지 크기 */
+    height: 24px;
+    vertical-align: middle; /* 텍스트와 이미지 정렬 */
+}
+
+.signup-wrap {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.signup-btn {
+  background: #999;
+  color: white;
+  padding: 10px 40px;
+  text-decoration: none;
+  border-radius: 30px;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.login-extra {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.login-extra a {
+  color: orange;
+  text-decoration: none;
+}
+
+.login-extra a:hover {
+  text-decoration: underline;
+}
+
+.login-extra p {
+  margin: 5px 0;
+}

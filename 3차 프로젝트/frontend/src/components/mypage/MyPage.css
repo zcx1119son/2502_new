@@ -1,0 +1,219 @@
+/* 마이페이지 컨테이너 기본 스타일 (필요시 조정) */
+.mypage-container {
+    padding: 20px;
+    max-width: 900px; /* 전체 페이지 너비 조정 */
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 프로필 정보 섹션 (좌측 텍스트, 우측 이미지 + 버튼) */
+/* -------------------------------------------------------------------------- */
+.mypage-user-info-section {
+    display: flex; /* Flexbox 활성화 */
+    justify-content: space-between; /* 양 끝 정렬 (텍스트 왼쪽, 이미지 오른쪽) */
+    align-items: flex-start; /* 세로 정렬: 상단으로 */
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+    flex-wrap: wrap; /* 작은 화면에서 요소들이 줄 바꿈되도록 */
+}
+
+.mypage-user-details-text {
+    flex-grow: 1; /* 남은 공간을 채우도록 성장 */
+    max-width: 60%; /* 텍스트가 너무 길어지지 않도록 최대 너비 제한 */
+}
+
+.mypage-user-details-text div {
+    margin-top: 10px;
+    margin-left: 50px;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+    color: #555;
+}
+
+.mypage-user-details-text span {
+    font-weight: bold;
+    color: #333;
+}
+
+/* 이메일과 전화번호 특정 스타일 (굵게, 특정 색상 등) */
+.mypage-user-details-text div#email span,
+.mypage-user-details-text div#phoneNumber span {
+    color: #007bff; /* 파란색 계열 */
+    font-weight: bold;
+    /* text-decoration: underline;  필요시 밑줄 추가 */
+}
+
+
+.mypage-profile-container {
+    display: flex;
+    flex-direction: column; /* 이미지와 버튼을 세로로 정렬 */
+    align-items: center; /* 가로 중앙 정렬 */
+    margin-left: auto; /* 우측으로 정렬 */
+}
+
+.mypage-user-image {
+    width: 150px; /* 이미지 크기 */
+    height: 150px;
+    border-radius: 50%; /* 원형 이미지 */
+    overflow: hidden;
+    border: 3px solid #eee;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px; /* 버튼과의 간격 */
+}
+
+.mypage-user-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 잘리지 않고 채워지도록 */
+}
+
+.mypage-edit-profile-btn {
+    padding: 8px 15px;
+    background-color: #333; /* 녹색 계열 */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95em;
+    transition: background-color 0.2s ease;
+}
+
+.mypage-edit-profile-btn:hover {
+    background-color: #333;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 탭 섹션 (기존 스타일 유지 또는 필요시 조정) */
+/* -------------------------------------------------------------------------- */
+.mypage-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    color: #777;
+    cursor: pointer;
+    transition: color 0.2s ease, border-bottom 0.2s ease;
+    border-bottom: 2px solid transparent;
+}
+
+.tab-button.active {
+    color: #333;
+    font-weight: bold;
+    border-bottom-color: #333;
+}
+
+.tab-button:hover:not(.active) {
+    color: #555;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 탭 내용 섹션 (기존 스타일 유지 또는 필요시 조정) */
+/* -------------------------------------------------------------------------- */
+.mypage-tab-content {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.section-title {
+    font-size: 1.4em;
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 1px dashed #eee;
+    padding-bottom: 10px;
+}
+
+.mypage-list-container {
+    max-height: 400px; /* 스크롤바가 생기도록 높이 제한 (필요시 조정) */
+    overflow-y: auto;
+    padding-right: 10px; /* 스크롤바 공간 확보 */
+}
+
+.mypage-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.mypage-list-item {
+    background-color: #fdfdfd;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: box-shadow 0.2s ease;
+}
+
+.mypage-list-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.mypage-list-item strong {
+    color: #0056b3;
+    display: block; /* 제목을 별도 줄로 */
+    margin-bottom: 5px;
+}
+
+.mypage-list-item p {
+    font-size: 0.95em;
+    color: #666;
+    line-height: 1.5;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.mypage-review-meta {
+    margin-top: 10px;
+    font-size: 0.85em;
+    color: #999;
+}
+
+.mypage-review-meta span {
+    margin-right: 15px;
+}
+
+/* 로딩 메시지 */
+.loading {
+    text-align: center;
+    padding: 50px;
+    font-size: 1.2em;
+    color: #666;
+}
+
+/* 반응형 디자인 (선택 사항) */
+@media (max-width: 768px) {
+    .mypage-user-info-section {
+        flex-direction: column; /* 세로로 쌓이도록 변경 */
+        align-items: center; /* 가운데 정렬 */
+    }
+    .mypage-user-details-text {
+        max-width: 100%; /* 너비 100% 사용 */
+        margin-right: 0;
+        margin-bottom: 20px; /* 아래 간격 추가 */
+        text-align: center; /* 텍스트 중앙 정렬 */
+    }
+    .mypage-profile-container {
+        margin-left: 0; /* 중앙 정렬을 위해 auto 제거 */
+        margin-top: 20px; /* 텍스트와의 간격 */
+    }
+}

@@ -1,0 +1,224 @@
+/* General Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.edit-profile-modal {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Spacing between sections */
+}
+
+.edit-profile-modal h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+}
+
+/* Form Group Styling for Uniformity (Label and Input on same line) */
+.form-group {
+    display: flex; /* Use flexbox for horizontal alignment */
+    align-items: center; /* Vertically align items in the center */
+    margin-bottom: 15px; /* Space between form groups */
+    gap: 15px; /* Space between label and input */
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #555;
+    font-size: 1em;
+    min-width: 90px; /* Fixed width for labels to align inputs */
+    text-align: right; /* Align label text to the right */
+    flex-shrink: 0; /* Prevent label from shrinking */
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group select {
+    flex-grow: 1; /* Allow input to take remaining space */
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+/* Profile Image Specific Styling */
+.profile-image-group {
+    display: flex; /* Use flexbox for this group */
+    flex-direction: column; /* Stack image and controls vertically */
+    align-items: center; /* Center items horizontally */
+    margin-bottom: 25px;
+    gap: 15px; /* Space between image, file input, and delete button */
+}
+
+.profile-image-preview {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.profile-image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholder-image {
+    color: #888;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.file-input-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.file-input-controls input[type="file"] {
+    flex-grow: 1;
+    min-width: 150px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    cursor: pointer;
+}
+
+.delete-image-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.delete-image-btn:hover {
+    background-color: #c82333;
+}
+
+.delete-image-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Form Actions (Buttons) */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.form-actions button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease;
+}
+
+.form-actions button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+}
+
+.form-actions button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+.form-actions button[type="button"] {
+    background-color: #6c757d;
+    color: white;
+}
+
+.form-actions button[type="button"]:hover {
+    background-color: #5a6268;
+}
+
+.form-actions button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Error Message */
+.error-message {
+    color: #dc3545;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .edit-profile-modal {
+        padding: 20px;
+        margin: 10px;
+    }
+    .form-group {
+        flex-direction: column; /* Stack label and input vertically on small screens */
+        align-items: flex-start; /* Align labels to the left */
+        gap: 8px; /* Reduce gap when stacked */
+    }
+    .form-group label {
+        width: auto; /* Remove fixed width when stacked */
+        text-align: left; /* Align label text to the left */
+    }
+    .form-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .form-actions button {
+        width: 100%;
+    }
+    .file-input-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .file-input-controls input[type="file"],
+    .delete-image-btn {
+        width: 100%;
+    }
+}

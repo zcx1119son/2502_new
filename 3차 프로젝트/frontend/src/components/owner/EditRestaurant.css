@@ -1,0 +1,248 @@
+/* src/pages/OwnerPage.css (또는 메뉴 관리 관련 CSS 파일) */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.edit-restaurant-page-container { /* 클래스명 변경 */
+    padding: 20px;
+    background-color: #f5f5f5;
+    min-height: calc(100vh - 90px);
+    font-family: Arial, sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.edit-restaurant-page-title { /* 클래스명 변경 */
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    color: #333;
+    width: 100%;
+    max-width: 500px;
+    text-align: left;
+}
+
+/* 🚨 이미지 업로드 섹션에 flexbox 적용 */
+.edit-restaurant-image-upload-section { /* 클래스명 변경 */
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+.edit-restaurant-image-placeholder-edit { /* 클래스명 변경 (원래도 edit 있었지만 일관성 위해 접두사 추가) */
+    width: 300px;
+    height: 300px;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    color: #666;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.edit-restaurant-image-placeholder-edit .edit-restaurant-image-preview { /* 클래스명 변경 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* 🚨 파일 찾기 버튼 스타일 */
+.edit-restaurant-find-file-button { /* 클래스명 변경 */
+    background-color: #e0e0e0;
+    color: #333;
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+}
+
+.edit-restaurant-find-file-button:hover { /* 클래스명 변경 */
+    background-color: #d0d0d0;
+    border-color: #b0b0b0;
+}
+
+
+/* Form section */
+.edit-restaurant-form-section { /* 클래스명 변경 */
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 0;
+    align-items: flex-start;
+}
+
+.edit-restaurant-form-group { /* 클래스명 변경 */
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 0;
+    gap: 15px;
+}
+
+.edit-restaurant-form-label { /* 클래스명 변경 */
+    font-size: 15px;
+    color: #333;
+    margin-bottom: 0;
+    font-weight: normal;
+    white-space: nowrap;
+    text-align: left;
+    width: auto;
+    flex-shrink: 0;
+}
+
+.edit-restaurant-form-input, /* 클래스명 변경 */
+.edit-restaurant-form-select { /* 클래스명 변경 */
+    flex-grow: 1;
+    max-width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 15px;
+    box-sizing: border-box;
+    color: #333;
+    height: 40px;
+}
+
+.edit-restaurant-form-input:focus, /* 클래스명 변경 */
+.edit-restaurant-form-select:focus { /* 클래스명 변경 */
+    border-color: #999;
+    outline: none;
+}
+
+.edit-restaurant-form-select-wrapper { /* 클래스명 변경 */
+    position: relative;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.edit-restaurant-radio-group { /* 클래스명 변경 */
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.edit-restaurant-radio-group .edit-restaurant-form-label { /* 클래스명 변경 */
+    margin-bottom: 0;
+    margin-right: 20px;
+    white-space: nowrap;
+    text-align: left;
+    width: auto;
+    flex-shrink: unset;
+}
+
+.edit-restaurant-radio-options { /* 클래스명 변경 */
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.edit-restaurant-radio-label { /* 클래스명 변경 */
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #333;
+    cursor: pointer;
+}
+
+.edit-restaurant-radio-label input[type="radio"] { /* 클래스명 변경 */
+    margin-right: 8px;
+}
+
+.edit-restaurant-form-buttons-container { /* 클래스명 변경 */
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.edit-restaurant-save-button { /* 클래스명 변경 */
+    background-color: #007bff;
+    color: white;
+    padding: 10px 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: normal;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    width: auto;
+}
+
+.edit-restaurant-save-button:hover { /* 클래스명 변경 */
+    background-color: #0056b3;
+    border-color: #b0b0b0;
+}
+
+.edit-restaurant-cancel-button { /* 클래스명 변경 */
+    background-color: #dc3545;
+    color: white;
+    padding: 10px 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: normal;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    width: auto;
+}
+
+.edit-restaurant-cancel-button:hover { /* 클래스명 변경 */
+    background-color: #c82333;
+    border-color: #b0b0b0;
+}
+
+/* 모바일 반응형 (필요시 추가) */
+@media (max-width: 600px) {
+    .edit-restaurant-page-title, /* 클래스명 변경 */
+    .edit-restaurant-image-upload-section, /* 클래스명 변경 */
+    .edit-restaurant-form-section, /* 클래스명 변경 */
+    .edit-restaurant-form-buttons-container { /* 클래스명 변경 */
+        padding: 0 10px;
+        max-width: 100%;
+    }
+
+    .edit-restaurant-form-group { /* 클래스명 변경 */
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .edit-restaurant-form-label { /* 클래스명 변경 */
+        margin-right: 0;
+        margin-bottom: 0;
+        text-align: left;
+        width: auto;
+        flex-shrink: unset;
+    }
+
+    .edit-restaurant-form-input, /* 클래스명 변경 */
+    .edit-restaurant-form-select, /* 클래스명 변경 */
+    .edit-restaurant-form-select-wrapper { /* 클래스명 변경 */
+        max-width: 100%;
+    }
+}
