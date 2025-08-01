@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foursquare.nextrozi.purchase.dao.PurchaseDAO">
+
+    <resultMap id="purchaseResultMap" type="com.foursquare.nextrozi.purchase.vo.PurchaseVO">
+        <id property="purchase_id" column="purchase_ID"/>
+        <result property="product_id" column="PRODUCT_ID"/>
+        <result property="product_name" column="PRODUCT_NAME"/>
+        <result property="client_id" column="CLIENT_ID"/>
+        <result property="client_name" column="CLIENT_NAME"/>
+        <result property="member_id" column="MEMBER_ID"/>
+        <result property="member_name" column="MEMBER_NAME"/>
+        <result property="shpping_count" column="purchase_COUNT"/>
+        <result property="purchase_status" column="purchase_STATUS"/>
+        <result property="created_date" column="CREATED_DATE"/>
+        <result property="created_id" column="CREATED_ID"/>
+        <result property="updated_data" column="UPDATED_DATA"/>
+        <result property="updated_id" column="UPDATED_ID"/>
+    </resultMap>
+
+    <sql id="purchaseListWhere">
+        <where>
+            <if test="purchase_status != null">
+                AND s.purchase_status = #{purchase_status}
+            </if>
+            <if test="searchType != null and searchKeyword != null and searchKeyword != ''">
+                <choose>
+                    <when test="searchType == 'product_name'">
+                        AND p.product_name LIKE '%' || #{searchKeyword} || '%'
+                    </when>
+                    <when test="searchType == 'client_name'">
+                        AND c.client_name LIKE '%' || #{searchKeyword} || '%'
+                    </when>
+                    <when test="searchType == 'member_name'">
+                        AND m.member_name LIKE '%' || #{searchKeyword} || '%'
+                    </when>
+                </choose>
+            </if>
+        </where>
+    </sql>
+
+    <select id="getPurchaseList" resultMap="purchaseResultMap" parameterType="map">
+        <![CDATA[
+        SELECT
+            s.purchase_id,
+            s.product_id,
+            p.product_name,
+            s.client_id,
+            c.client_name,
+            s.member_id,
+            m.member_name,
+            s.purchase_count,
+            s.purchase_status,
+            s.created_date,
+            s.created_id,
+            s.updated_data,
+            s.updated_id
+        FROM
+            tb_purchase s
+        LEFT JOIN
+            tb_product p ON s.product_id = p.product_id
+        LEFT JOIN
+            tb_client c ON s.client_id = c.client_id
+        LEFT JOIN
+            tb_member m ON s.member_id = m.member_id
+        ]]>
+        <include refid="purchaseListWhere"/>
+        <![CDATA[
+        ORDER BY
+            s.created_date DESC, s.purchase_id DESC
+        OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
+        ]]>
+    </select>
+
+    <select id="getPurchaseCount" resultType="int" parameterType="map">
+        <![CDATA[
+        SELECT
+            COUNT(s.purchase_id)
+        FROM
+            tb_purchase s
+        LEFT JOIN
+            tb_product p ON s.product_id = p.product_id
+        LEFT JOIN
+            tb_client c ON s.client_id = c.client_id
+        LEFT JOIN
+            tb_member m ON s.member_id = m.member_id
+        ]]>
+        <include refid="purchaseListWhere"/>
+    </select>
+
+    <insert id="insertPurchase" parameterType="com.foursquare.nextrozi.purchase.vo.PurchaseVO">
+        <![CDATA[
+        INSERT INTO tb_purchase (
+            product_id,
+            client_id,
+            member_id,
+            purchase_count,
+            purchase_status,
+            created_id
+        ) VALUES (
+            (SELECT product_id FROM tb_product WHERE product_name = #{product_name}),
+            (SELECT client_id FROM tb_client WHERE client_name = #{client_name}),
+            (SELECT member_id FROM tb_member WHERE member_name = #{member_name}),
+            #{shpping_count, jdbcType=NUMERIC},
+            #{purchase_status, jdbcType=NUMERIC},
+            #{created_id, jdbcType=VARCHAR}
+        )
+        ]]>
+    </insert>
+
+    <update id="updatepurchaseStatus" parameterType="com.foursquare.nextrozi.purchase.vo.PurchaseVO">
+        <![CDATA[
+        UPDATE tb_purchase
+        SET
+            purchase_status = #{purchase_status, jdbcType=NUMERIC},
+            updated_data = SYSDATE,
+            updated_id = #{updated_id, jdbcType=VARCHAR}
+        WHERE
+            purchase_id = #{purchase_id, jdbcType=NUMERIC}
+        ]]>
+    </update>
+
+    <update id="updatePurchase" parameterType="com.foursquare.nextrozi.purchase.vo.PurchaseVO">
+        <![CDATA[
+        UPDATE tb_purchase
+        SET
+            product_id = (SELECT product_id FROM tb_product WHERE product_name = #{product_name}),
+            client_id = (SELECT client_id FROM tb_client WHERE client_name = #{client_name}),
+            member_id = (SELECT member_id FROM tb_member WHERE member_name = #{member_name}),
+            purchase_count = #{shpping_count, jdbcType=NUMERIC},
+            purchase_status = #{purchase_status, jdbcType=NUMERIC},
+            updated_data = SYSDATE,
+            updated_id = #{updated_id, jdbcType=VARCHAR}
+        WHERE
+            purchase_id = #{purchase_id, jdbcType=NUMERIC}
+        ]]>
+    </update>
+
+</mapper>

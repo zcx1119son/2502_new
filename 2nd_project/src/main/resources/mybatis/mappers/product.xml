@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.foursquare.nextrozi.product.dao.ProductDAO">
+
+    <!-- ResultMap for ProductVO -->
+    <resultMap id="productResultMap" type="com.foursquare.nextrozi.product.vo.ProductVO">
+        <id property="product_id" column="product_id"/>
+        <result property="product_name" column="product_name"/>
+        <result property="client_id" column="client_id"/> <!-- client_id 컬럼을 client_id로 매핑 -->
+        <result property="client_name" column="client_name"/> <!-- JOIN을 통해 채워질 클라이언트 이름 -->
+        <result property="product_count" column="product_count"/>
+        <result property="created_date" column="created_date"/>
+        <result property="created_id" column="created_id"/>
+        <result property="updated_data" column="updated_data"/>
+        <result property="updated_id" column="updated_id"/>
+    </resultMap>
+
+    <!-- SQL to retrieve a paginated list of products with optional search criteria -->
+    <select id="getPagedProducts" resultMap="productResultMap">
+        <![CDATA[
+        SELECT
+            p.product_id,
+            p.product_name,
+            p.client_id,
+            c.client_name,
+            p.product_count,
+            p.created_date,
+            p.created_id,
+            p.updated_data,
+            p.updated_id
+        FROM tb_product p
+        LEFT JOIN tb_client c ON p.client_id = c.client_id
+        WHERE 1=1
+        ]]>
+        <if test="searchType != null and searchKeyword != null and searchKeyword != ''">
+            <choose>
+                <when test="searchType == 'client_id'">
+                    <![CDATA[ AND p.client_id = #{searchKeyword} ]]>
+                </when>
+                <when test="searchType == 'product_id'">
+                    <![CDATA[ AND p.product_id = #{searchKeyword} ]]>
+                </when>
+                <when test="searchType == 'product_name'">
+                    <![CDATA[ AND p.product_name LIKE '%' || #{searchKeyword} || '%' ]]>
+                </when>
+                <when test="searchType == 'client_name'">
+                    <![CDATA[ AND c.client_name LIKE '%' || #{searchKeyword} || '%' ]]>
+                </when>
+            </choose>
+        </if>
+        <![CDATA[
+        ORDER BY p.${pageable.sort.iterator().next().property} ${pageable.sort.iterator().next().direction}
+        OFFSET #{pageable.offset} ROWS
+        FETCH NEXT #{pageable.pageSize} ROWS ONLY
+        ]]>
+    </select>
+
+    <!-- SQL to count total products with optional search criteria -->
+    <select id="countProducts" resultType="long">
+        <![CDATA[
+        SELECT COUNT(*)
+        FROM tb_product p
+        LEFT JOIN tb_client c ON p.client_id = c.client_id
+        WHERE 1=1
+        ]]>
+        <if test="searchType != null and searchKeyword != null and searchKeyword != ''">
+            <choose>
+                <when test="searchType == 'client_id'">
+                    <![CDATA[ AND p.client_id = #{searchKeyword} ]]>
+                </when>
+                <when test="searchType == 'product_id'">
+                    <![CDATA[ AND p.product_id = #{searchKeyword} ]]>
+                </when>
+                <when test="searchType == 'product_name'">
+                    <![CDATA[ AND p.product_name LIKE '%' || #{searchKeyword} || '%' ]]>
+                </when>
+                <when test="searchType == 'client_name'">
+                    <![CDATA[ AND c.client_name LIKE '%' || #{searchKeyword} || '%' ]]>
+                </when>
+            </choose>
+        </if>
+    </select>
+
+    <!-- SQL to insert a new product -->
+    <!-- For Oracle 18c IDENTITY columns, useGeneratedKeys="true" is the standard way. -->
+    <!-- The <selectKey> tag with .currval is typically not needed here. -->
+    <insert id="addProduct" parameterType="com.foursquare.nextrozi.product.vo.ProductVO" keyProperty="product_id">
+        <![CDATA[
+            INSERT INTO tb_product (
+                product_name,
+                client_id,
+                product_count,
+                created_date,
+                created_id
+            ) VALUES (
+                #{product_name},
+                (select client_id from tb_client where client_name = #{client_name}),
+                #{product_count},
+                SYSDATE,
+                #{created_id}
+            )
+        ]]>
+    </insert>
+
+    <!-- SQL to select a product by product_id -->
+    <select id="getProductById" parameterType="long" resultMap="productResultMap">
+        <![CDATA[
+        SELECT
+            p.product_id,
+            p.product_name,
+            p.client_id,
+            c.client_name,
+            p.product_count,
+            p.created_date,
+            p.created_id,
+            p.updated_data,
+            p.updated_id
+        FROM tb_product p
+        LEFT JOIN tb_client c ON p.client_id = c.client_id
+        WHERE p.product_id = #{productId}
+        ]]>
+    </select>
+
+    <!-- SQL to update an existing product -->
+    <update id="updateProduct" parameterType="com.foursquare.nextrozi.product.vo.ProductVO">
+        <![CDATA[
+            UPDATE tb_product
+            SET
+                product_name = #{product_name},
+                client_id = (select client_id from tb_client where client_name = #{client_name}),
+                product_count = #{product_count},
+                updated_data = SYSDATE,
+                updated_id = #{updated_id}
+            WHERE product_id = #{product_id}
+        ]]>
+    </update>
+
+    <!-- SQL to delete a single product by product_id -->
+    <delete id="deleteProduct" parameterType="long">
+        <![CDATA[
+        DELETE FROM tb_product
+        WHERE product_id = #{productId}
+        ]]>
+    </delete>
+
+    <!-- SQL to delete multiple products by a list of product_ids -->
+    <delete id="deleteProductsByIds" parameterType="java.util.List">
+        <![CDATA[
+        DELETE FROM tb_product WHERE product_id IN
+        ]]>
+        <foreach item="id" collection="productIds" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

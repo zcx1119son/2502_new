@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foursquare.nextrozi.client.dao.ClientDAO">
+
+    <resultMap id="clientResultMap" type="com.foursquare.nextrozi.client.vo.ClientVO">
+        <id property="client_id" column="CLIENT_ID"/>
+        <result property="client_name" column="CLIENT_NAME"/>
+        <result property="client_address" column="CLIENT_ADDRESS"/>
+        <result property="client_phone" column="CLIENT_PHONE"/>
+        <result property="member_id" column="MEMBER_ID"/>
+        <result property="client_note" column="CLIENT_NOTE"/>
+        <result property="created_date" column="CREATED_DATE"/>
+        <result property="created_id" column="MEMBER_ID"/>
+        <result property="updated_data" column="UPDATED_DATA"/>
+        <result property="updated_id" column="UPDATED_ID"/>
+        <result property="member_name" column="MEMBER_NAME"/> </resultMap>
+
+    <insert id="insertClient" parameterType="com.foursquare.nextrozi.client.vo.ClientVO">
+        INSERT INTO TB_CLIENT (
+        CLIENT_NAME,
+        CLIENT_ADDRESS,
+        CLIENT_PHONE,
+        MEMBER_ID,
+        CLIENT_NOTE,
+        CREATED_DATE
+        ) VALUES (
+        #{client_name},
+        #{client_address},
+        #{client_phone},
+        (select member_id from tb_member where member_name = #{member_name}),
+        #{client_note},
+        SYSDATE
+        )
+    </insert>
+
+    <sql id="searchWhereClause">
+        <where>
+            <if test="searchKeyword != null and searchKeyword != ''">
+                <choose>
+                    <when test="searchType == 'client_id'">
+                        tbc.CLIENT_ID = #{searchKeyword}
+                    </when>
+                    <when test="searchType == 'client_name'">
+                        tbc.CLIENT_NAME LIKE '%' || #{searchKeyword} || '%'
+                    </when>
+                    <when test="searchType == 'member_id'">
+                        tbc.MEMBER_ID LIKE '%' || #{searchKeyword} || '%'
+                    </when>
+                    <when test="searchType == 'member_name'">
+                        m.MEMBER_NAME LIKE '%' || #{searchKeyword} || '%'
+                    </when>
+                </choose>
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectAllClients" resultMap="clientResultMap">
+        <![CDATA[
+        SELECT
+        tbc.CLIENT_ID,
+        tbc.CLIENT_NAME,
+        tbc.CLIENT_ADDRESS,
+        tbc.CLIENT_PHONE,
+        tbc.MEMBER_ID,
+        m.MEMBER_NAME,
+        tbc.CLIENT_NOTE,
+        tbc.CREATED_DATE,
+        tbc.UPDATED_DATA,
+        tbc.UPDATED_ID
+        FROM
+        TB_CLIENT tbc
+        LEFT JOIN TB_MEMBER m ON tbc.MEMBER_ID = m.MEMBER_ID
+        ]]>
+        <include refid="searchWhereClause"/>
+        ORDER BY
+        tbc.CREATED_DATE DESC
+        OFFSET #{offset} ROWS
+        FETCH NEXT #{limit} ROWS ONLY
+    </select>
+
+    <select id="countAllClients" resultType="long">
+        <![CDATA[
+        SELECT COUNT(*)
+        FROM TB_CLIENT tbc
+        LEFT JOIN TB_MEMBER m ON tbc.MEMBER_ID = m.MEMBER_ID
+        ]]>
+        <include refid="searchWhereClause"/>
+    </select>
+
+    <update id="updateClient" parameterType="com.foursquare.nextrozi.client.vo.ClientVO">
+        UPDATE TB_CLIENT
+        SET
+        CLIENT_NAME = #{client_name},
+        CLIENT_ADDRESS = #{client_address},
+        CLIENT_PHONE = #{client_phone},
+        MEMBER_ID = (select member_id from tb_member where member_name = #{member_name}),
+        CLIENT_NOTE = #{client_note},
+        UPDATED_DATA = SYSDATE
+        WHERE
+        CLIENT_ID = #{client_id}
+    </update>
+
+    <delete id="deleteClient" parameterType="long">
+        DELETE FROM TB_CLIENT
+        WHERE CLIENT_ID = #{clientId}
+    </delete>
+
+    <select id="selectClientById" parameterType="long" resultMap="clientResultMap">
+        <![CDATA[
+        SELECT
+        tbc.CLIENT_ID,
+        tbc.CLIENT_NAME,
+        tbc.CLIENT_ADDRESS,
+        tbc.CLIENT_PHONE,
+        tbc.MEMBER_ID,
+        m.MEMBER_NAME,
+        tbc.CLIENT_NOTE,
+        tbc.CREATED_DATE,
+        tbc.UPDATED_DATA,
+        tbc.UPDATED_ID
+        FROM
+        TB_CLIENT tbc
+        LEFT JOIN TB_MEMBER m ON tbc.MEMBER_ID = m.MEMBER_ID
+        WHERE
+        tbc.CLIENT_ID = #{clientId}
+        ]]>
+    </select>
+</mapper>

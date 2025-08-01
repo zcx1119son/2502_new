@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foursquare.nextrozi.master.dao.MasterDAO">
+
+    <resultMap id="masterResult" type="com.foursquare.nextrozi.master.vo.MasterVO">
+        <result property="companyCode" column="COMPANY_CODE" />
+        <result property="companyName" column="COMPANY_NAME" />
+        <result property="companyEmail" column="COMPANY_EMAIL" />
+        <result property="companyPwd" column="COMPANY_PWD" />
+        <result property="companyOwnername" column="COMPANY_OWNERNAME" />
+        <result property="companyPhone" column="COMPANY_PHONE" />
+        <result property="createdDate" column="CREATED_DATE" />
+        <result property="createdId" column="CREATED_ID" />
+        <result property="updatedData" column="UPDATED_DATA" />
+        <result property="updatedId" column="UPDATED_ID" />
+        <result property="status" column="STATUS" />
+    </resultMap>
+
+    <select id="selectRequestedCompanyList" parameterType="java.util.Map" resultMap="masterResult">
+        SELECT COMPANY_CODE, COMPANY_NAME, COMPANY_EMAIL, COMPANY_OWNERNAME, CREATED_DATE, STATUS, UPDATED_ID, UPDATED_DATA
+        FROM TB_COMPANY
+        WHERE STATUS = '요청'
+        <if test="searchField == 'companyCode' and keyword != null and keyword != ''">
+            AND COMPANY_CODE LIKE '%' || #{keyword} || '%'
+        </if>
+        <if test="searchField == 'companyName' and keyword != null and keyword != ''">
+            AND COMPANY_NAME LIKE '%' || #{keyword} || '%'
+        </if>
+        <if test="searchField == 'regManager' and keyword != null and keyword != ''">
+            AND COMPANY_OWNERNAME LIKE '%' || #{keyword} || '%'
+        </if>
+        ORDER BY CREATED_DATE DESC
+        OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
+    </select>
+
+    <select id="selectApprovedCompanyList" parameterType="java.util.Map" resultMap="masterResult">
+        SELECT COMPANY_CODE, COMPANY_NAME, COMPANY_EMAIL, COMPANY_OWNERNAME, CREATED_DATE, STATUS, UPDATED_ID, UPDATED_DATA
+        FROM TB_COMPANY
+        WHERE STATUS = '승인'
+        <if test="searchField == 'companyCode' and keyword != null and keyword != ''">
+            AND COMPANY_CODE LIKE '%' || #{keyword} || '%'
+        </if>
+        <if test="searchField == 'companyName' and keyword != null and keyword != ''">
+            AND COMPANY_NAME LIKE '%' || #{keyword} || '%'
+        </if>
+        <if test="searchField == 'regManager' and keyword != null and keyword != ''">
+            AND COMPANY_OWNERNAME LIKE '%' || #{keyword} || '%'
+        </if>
+        ORDER BY UPDATED_DATA DESC
+        OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
+    </select>
+
+    <select id="getTotalCompanyCountByStatus" parameterType="java.util.Map" resultType="int">
+        SELECT COUNT(*)
+        FROM TB_COMPANY
+        <where>
+            <if test="status == '요청'">
+                STATUS = '요청'
+            </if>
+            <if test="status == '승인'">
+                STATUS = '승인'
+            </if>
+            <if test="searchField == 'companyCode' and keyword != null and keyword != ''">
+                AND COMPANY_CODE LIKE '%' || #{keyword} || '%'
+            </if>
+            <if test="searchField == 'companyName' and keyword != null and keyword != ''">
+                AND COMPANY_NAME LIKE '%' || #{keyword} || '%'
+            </if>
+            <if test="searchField == 'regManager' and keyword != null and keyword != ''">
+                AND COMPANY_OWNERNAME LIKE '%' || #{keyword} || '%'
+            </if>
+        </where>
+    </select>
+
+    <update id="updateCompanyStatusToApproved" parameterType="map">
+        UPDATE TB_COMPANY
+        SET STATUS = '승인',
+        UPDATED_ID = #{updateId},
+        UPDATED_DATA = SYSDATE
+        WHERE COMPANY_CODE IN
+        <foreach item="code" collection="companyCodes" open="(" separator="," close=")">
+            #{code}
+        </foreach>
+    </update>
+
+    <delete id="deleteCompanies" parameterType="map">
+        DELETE FROM TB_COMPANY
+        WHERE COMPANY_CODE IN
+        <foreach item="code" collection="companyCodes" open="(" separator="," close=")">
+            #{code}
+        </foreach>
+    </delete>
+
+    <select id="selectCompanyByCode" parameterType="java.lang.String" resultMap="masterResult">
+        SELECT COMPANY_CODE, COMPANY_NAME, COMPANY_EMAIL, COMPANY_OWNERNAME, CREATED_DATE, STATUS, UPDATED_ID, UPDATED_DATA
+        FROM TB_COMPANY
+        WHERE COMPANY_CODE = #{companyCode}
+    </select>
+
+    <update id="updateCompany" parameterType="com.foursquare.nextrozi.master.vo.MasterVO">
+        UPDATE TB_COMPANY
+        <set>
+            <if test="companyName != null">COMPANY_NAME = #{companyName},</if>
+            <if test="companyEmail != null">COMPANY_EMAIL = #{companyEmail},</if>
+            <if test="companyOwnername != null">COMPANY_OWNERNAME = #{companyOwnername},</if>
+            UPDATED_DATA = SYSDATE,
+            UPDATED_ID = 'admin'
+        </set>
+        WHERE COMPANY_CODE = #{companyCode}
+    </update>
+
+</mapper>

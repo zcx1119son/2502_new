@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.foursquare.nextrozi.membersignup.dao.MemberSignupDAO">
+
+    <insert id="insertMember" parameterType="com.foursquare.nextrozi.membersignup.vo.MemberSignupVO">
+        INSERT INTO TB_MEMBER (
+        member_email,
+        member_pwd,
+        member_phone,
+        member_name,
+        company_code,
+        created_date,
+        created_id
+        ) VALUES (
+        #{member_email},
+        #{member_pwd},
+        #{member_phone},
+        #{member_name},
+        #{company_code},
+        sysdate,
+        #{created_id}
+        )
+    </insert>
+
+    <select id="checkEmailExists" parameterType="string" resultType="int">
+        SELECT COUNT(*)
+        FROM TB_MEMBER
+        WHERE member_email = #{email}
+    </select>
+
+</mapper>

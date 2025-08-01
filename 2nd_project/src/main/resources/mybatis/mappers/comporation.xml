@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.foursquare.nextrozi.management.dao.ManagementDAO">
+
+    <resultMap id="managementResult" type="com.foursquare.nextrozi.management.vo.ManagementVO">
+        <id property="management_Id" column="MANAGEMENT_ID"/>
+        <result property="employee_Id" column="EMPLOYEE_ID"/>
+        <result property="employee_Name" column="EMPLOYEE_NAME"/>
+        <result property="employee_Phon_Number" column="EMPLOYEE_PHON_NUMBER"/>
+        <result property="employee_Email" column="EMPLOYEE_EMAIL"/>
+        <result property="department_Name" column="DEPARTMENT_NAME"/>
+        <result property="position" column="POSITION"/>
+        <result property="create_date" column="CREATE_DATE"/>
+        <result property="create_id" column="CREATE_ID"/>
+        <result property="update_date" column="UPDATE_DATE"/>
+        <result property="update_id" column="UPDATE_ID"/>
+        <result property="remarks" column="REMARKS"/> <result property="accessRightsNames" column="accessRightsNames"/>
+    </resultMap>
+
+    <resultMap id="menuResult" type="com.foursquare.nextrozi.management.vo.MenuVO">
+        <id property="menu_id" column="MENU_ID"/>
+        <result property="menu_name" column="MENU_NAME"/>
+        <result property="menu_path" column="MENU_PATH"/>
+        <result property="menu_order" column="MENU_ORDER"/>
+        <result property="is_active" column="IS_ACTIVE"/>
+        <result property="create_date" column="CREATE_DATE"/>
+        <result property="create_id" column="CREATE_ID"/>
+        <result property="update_date" column="UPDATE_DATE"/>
+        <result property="update_id" column="UPDATE_ID"/>
+    </resultMap>
+
+    <select id="selectAllEmployeeList" parameterType="java.util.Map" resultMap="managementResult">
+        SELECT
+            m.MANAGEMENT_ID, m.EMPLOYEE_ID, m.EMPLOYEE_NAME, m.EMPLOYEE_PHON_NUMBER, m.EMPLOYEE_EMAIL,
+            m.DEPARTMENT_NAME, m.POSITION, m.REMARKS,  m.CREATE_ID, m.CREATE_DATE, m.UPDATE_ID,
+            m.UPDATE_DATE,
+            (
+                SELECT
+                    LISTAGG(mu.MENU_NAME, ', ') WITHIN GROUP (ORDER BY mu.MENU_ID)
+                    FROM C##TL.T_USER_MENU_ACCESS uma
+                    JOIN C##TL.T_MENU mu ON uma.MENU_ID = mu.MENU_ID
+                    WHERE uma.MANAGEMENT_ID = m.MANAGEMENT_ID
+            ) AS accessRightsNames
+            FROM C##TL.T_MANAGEMENT m
+            WHERE 1=1
+            <if test="searchField != null and keyword != null and keyword != ''">
+                <choose>
+                    <when test="searchField == 'management_Id'">
+                        AND m.MANAGEMENT_ID LIKE '%' || #{keyword} || '%'
+                     </when>
+                     <when test="searchField == 'employee_Name'">
+                        AND m.EMPLOYEE_NAME LIKE '%' || #{keyword} || '%'
+                    </when>
+                    <when test="searchField == 'department_Name'">
+                        AND m.DEPARTMENT_NAME LIKE '%' || #{keyword} || '%'
+                    </when>
+                    <when test="searchField == 'position'">
+                        AND m.POSITION LIKE '%' || #{keyword} || '%'
+                    </when>
+                 </choose>
+            </if>
+            ORDER BY m.MANAGEMENT_ID DESC
+            OFFSET #{offset} ROWS FETCH NEXT #{limit} ROWS ONLY
+    </select>
+
+    <update id="updateSelectedStaff" parameterType="java.util.List">
+        <foreach collection="list" item="vo" separator=";">
+            UPDATE
+                C##TL.T_MANAGEMENT
+                SET
+                    EMPLOYEE_NAME = #{vo.employee_Name}, EMPLOYEE_PHON_NUMBER = #{vo.employee_Phon_Number},
+                    EMPLOYEE_EMAIL = #{vo.employee_Email}, DEPARTMENT_NAME = #{vo.department_Name},
+                    POSITION = #{vo.position}, UPDATE_DATE = SYSDATE, UPDATE_ID = #{vo.update_id, jdbcType=VARCHAR}
+                WHERE MANAGEMENT_ID = #{vo.management_Id}
+        </foreach>
+    </update>
+
+    <delete id="deleteSelectedStaff" parameterType="java.util.List">
+        DELETE FROM C##TL.T_MANAGEMENT
+        WHERE MANAGEMENT_ID IN
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="getTotalCountByEmployee" parameterType="java.util.Map" resultType="int">
+        SELECT COUNT(*) FROM C##TL.T_MANAGEMENT
+        WHERE 1=1
+        <if test="searchField != null and searchField != '' and keyword != null and keyword != ''">
+            <choose>
+                <when test="searchField == 'employee_Id'">
+                    AND EMPLOYEE_ID LIKE '%' || #{keyword} || '%'
+                </when>
+                <when test="searchField == 'employee_Name'">
+                    AND EMPLOYEE_NAME LIKE '%' || #{keyword} || '%'
+                </when>
+                <when test="searchField == 'department_Name'">
+                    AND DEPARTMENT_NAME LIKE '%' || #{keyword} || '%'
+                </when>
+                <otherwise>
+                    AND (EMPLOYEE_ID LIKE '%' || #{keyword} || '%'
+                    OR EMPLOYEE_NAME LIKE '%' || #{keyword} || '%'
+                    OR DEPARTMENT_NAME LIKE '%' || #{keyword} || '%')
+                </otherwise>
+            </choose>
+        </if>
+    </select>
+
+    <insert id="insertEmployee" parameterType="com.foursquare.nextrozi.management.vo.ManagementVO">
+        <selectKey keyProperty="management_Id" resultType="int" order="AFTER">
+            SELECT C##TL.T_MANAGEMENT_SEQ.CURRVAL FROM DUAL
+        </selectKey>
+        INSERT INTO C##TL.T_MANAGEMENT (
+            EMPLOYEE_ID, EMPLOYEE_NAME, EMPLOYEE_PHON_NUMBER, EMPLOYEE_EMAIL, DEPARTMENT_NAME,
+            POSITION, CREATE_DATE, CREATE_ID, UPDATE_DATE, UPDATE_ID, REMARKS
+        )
+        VALUES (
+            #{employee_Id}, #{employee_Name}, #{employee_Phon_Number}, #{employee_Email},
+            #{department_Name}, #{position}, SYSDATE, #{create_id, jdbcType=VARCHAR},
+            SYSDATE, #{update_id, jdbcType=VARCHAR}, #{remarks, jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertDefaultAccessRights" parameterType="com.foursquare.nextrozi.management.vo.ManagementVO">
+        INSERT INTO C##TL.T_USER_MENU_ACCESS (
+            MANAGEMENT_ID, MENU_ID, CREATE_DATE, CREATE_ID, UPDATE_DATE, UPDATE_ID, REMARKS
+        )
+        VALUES ( #{management_Id}, (
+            SELECT MENU_ID FROM C##TL.T_MENU WHERE MENU_NAME = '홈'
+            ), SYSDATE, #{create_id, jdbcType=VARCHAR}, SYSDATE, #{remarks, jdbcType=VARCHAR},
+            #{update_id, jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <select id="selectedEmployeeByStaffId" parameterType="int" resultMap="managementResult">
+        SELECT
+            tm.MANAGEMENT_ID, tm.EMPLOYEE_ID, tm.EMPLOYEE_NAME, tm.EMPLOYEE_PHON_NUMBER, tm.EMPLOYEE_EMAIL,
+            tm.DEPARTMENT_NAME, tm.POSITION, tm.CREATE_DATE, tm.CREATE_ID, tm.UPDATE_DATE,
+            tm.UPDATE_ID, tm.REMARKS, tuma.MENU_ID FROM C##TL.T_MANAGEMENT tm
+            LEFT JOIN C##TL.T_USER_MENU_ACCESS tuma ON tm.MANAGEMENT_ID = tuma.MANAGEMENT_ID
+        WHERE
+            tm.MANAGEMENT_ID = #{managementId}
+    </select>
+
+    <insert id="insertSpecificMenuAccess" parameterType="com.foursquare.nextrozi.management.vo.ManagementVO">
+        INSERT INTO C##TL.T_USER_MENU_ACCESS (
+            MANAGEMENT_ID, MENU_ID, CREATE_DATE, CREATE_ID, UPDATE_DATE, UPDATE_ID, REMARKS
+        )
+        VALUES (
+            #{management_Id}, (
+                SELECT MENU_ID FROM C##TL.T_MENU WHERE MENU_NAME = #{remarks}
+            ), SYSDATE, #{create_id, jdbcType=VARCHAR}, SYSDATE, #{remarks, jdbcType=VARCHAR},
+            #{update_id, jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <delete id="deleteUserMenuAccessByManagementId" parameterType="int">
+        DELETE FROM C##TL.T_USER_MENU_ACCESS
+        WHERE MANAGEMENT_ID = #{managementId}
+    </delete>
+
+    <select id="selectAllMenus" resultMap="menuResult">
+        SELECT MENU_ID, MENU_NAME, MENU_PATH, MENU_ORDER, IS_ACTIVE, CREATE_DATE, CREATE_ID, UPDATE_DATE, UPDATE_ID
+        FROM C##TL.T_MENU
+        ORDER BY MENU_ORDER ASC
+    </select>
+
+    <select id="selectUserMenuIds" parameterType="int" resultType="int">
+        SELECT MENU_ID
+        FROM C##TL.T_USER_MENU_ACCESS
+        WHERE MANAGEMENT_ID = #{managementId}
+    </select>
+
+    <insert id="insertSpecificMenuAccessWithId" parameterType="com.foursquare.nextrozi.management.vo.ManagementVO">
+        INSERT INTO C##TL.T_USER_MENU_ACCESS (
+            MANAGEMENT_ID, MENU_ID, CREATE_DATE, CREATE_ID, UPDATE_DATE, UPDATE_ID, REMARKS
+        )
+        VALUES (
+            #{management_Id}, #{menu_id}, SYSDATE, #{create_id, jdbcType=VARCHAR}, SYSDATE,
+            #{update_id, jdbcType=VARCHAR}, #{remarks, jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <select id="selectEmployeeNamesByIds" parameterType="java.util.List" resultType="string">
+        SELECT EMPLOYEE_NAME
+        FROM C##TL.T_MANAGEMENT
+        WHERE MANAGEMENT_ID IN
+        <foreach item="id" collection="list" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        ORDER BY EMPLOYEE_NAME ASC
+    </select>
+</mapper>

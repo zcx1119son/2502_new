@@ -1,0 +1,662 @@
+<%-- clientList.jsp --%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>거래처 관리</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <style>
+            body {
+            font-family: 'Apple SD Gothic Neo', sans-serif;
+            background-color: #f7f7fb;
+            margin: 0;
+            padding: 40px;
+            }
+            .nav-menu {
+                display: flex;
+                background-color: #e9ecef;
+                padding: 10px 20px;
+                border-bottom: 1px solid #dee2e6;
+            }
+            .nav-menu a {
+                text-decoration: none;
+                color: #495057;
+                padding: 8px 15px;
+                margin-right: 5px;
+                border-radius: 4px;
+                font-weight: bold;
+            }
+            .nav-menu a.active, .nav-menu a:hover {
+                background-color: #007bff;
+                color: white;
+            }
+            .container {
+                margin-top: 60px;
+                padding: 40px;
+            }
+            .top-section {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            .top-section .search-bar {
+                display: flex;
+                align-items: center;
+            }
+            .top-section .search-bar select,
+            .top-section .search-bar input[type="text"],
+            .top-section .search-bar button {
+                padding: 8px 12px;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                margin-right: 5px;
+            }
+            .top-section .buttons button {
+                padding: 8px 15px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-left: 5px;
+                font-weight: bold;
+            }
+            .top-section .buttons .btn-primary {
+                background-color: #007bff;
+                color: white;
+            }
+            .top-section .buttons .btn-secondary {
+                background-color: #6c757d;
+                color: white;
+            }
+            .top-section .buttons .btn-danger {
+                background-color: #dc3545;
+                color: white;
+            }
+
+            .content-area {
+                background-color: white;
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                padding: 15px;
+            }
+            .content-area h2 {
+                margin-top: 0;
+                font-size: 20px;
+                color: #495057;
+            }
+            /* Style for the table action area, removed global edit button */
+            .table-actions-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+            .table-actions-row h2 {
+                margin: 0;
+            }
+
+            .client-table { /* Renamed from product-table */
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 15px;
+            }
+            .client-table th, .client-table td { /* Renamed from product-table */
+                border: 1px solid #dee2e6;
+                padding: 10px;
+                text-align: left;
+            }
+            .client-table th { /* Renamed from product-table */
+                background-color: #e9ecef;
+                font-weight: bold;
+                white-space: nowrap; /* Prevent wrapping for headers */
+            }
+            .client-table tr:nth-child(even) { /* Renamed from product-table */
+                background-color: #f8f9fa;
+            }
+            .client-table input[type="checkbox"] { /* Renamed from product-table */
+                margin: 0;
+            }
+            /* Style for the inline edit button */
+            .client-table .btn-edit-row { /* Renamed from product-table */
+                padding: 5px 10px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                background-color: #6c757d; /* secondary color */
+                color: white;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+            .client-table .btn-edit-row:hover { /* Renamed from product-table */
+                background-color: #5a6268;
+            }
+
+            .pagination {
+                text-align: center;
+                margin-top: 20px;
+            }
+            .pagination a {
+                display: inline-block;
+                padding: 8px 12px;
+                margin: 0 4px;
+                border: 1px solid #dee2e6;
+                text-decoration: none;
+                color: #007bff;
+                border-radius: 4px;
+            }
+            .pagination a.active {
+                background-color: #007bff;
+                color: white;
+                border-color: #007bff;
+            }
+            .pagination a:hover:not(.active) {
+                background-color: #e9ecef;
+            }
+
+            /* Modal Styles */
+            .modal {
+                display: none; /* Hidden by default */
+                position: fixed; /* Stay in place */
+                z-index: 1000; /* Sit on top */
+                left: 0;
+                top: 0;
+                width: 100%; /* Full width */
+                height: 100%; /* Full height */
+                overflow: auto; /* Enable scroll if needed */
+                background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+                justify-content: center;
+                align-items: center;
+            }
+            .modal-content {
+                background-color: #fefefe;
+                margin: auto; /* Center vertically and horizontally */
+                padding: 20px;
+                border: 1px solid #888;
+                width: 70%; /* Adjust as needed */
+                max-width: 800px;
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+                animation-name: animatetop;
+                animation-duration: 0.4s;
+                position: relative;
+                border-radius: 8px;
+            }
+            .close-button {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+                position: absolute;
+                top: 10px;
+                right: 20px;
+            }
+            .close-button:hover,
+            .close-button:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            .modal-body .modal-buttons {
+                text-align: right;
+                margin-top: 25px;
+            }
+            .modal-body .modal-buttons button {
+                padding: 8px 15px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                margin-left: 5px;
+                font-weight: bold;
+            }
+            .modal-body .modal-buttons .btn-submit {
+                 background-color: #007bff;
+                color: white;
+            }
+            .modal-body .modal-buttons .btn-cancel {
+                background-color: #6c757d;
+                color: white;
+            }
+            .modal-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 15px;
+            }
+            .modal-table th, .modal-table td {
+                border: 1px solid #dee2e6;
+                padding: 10px;
+                text-align: left;
+            }
+            .modal-table th {
+                background-color: #e9ecef;
+                font-weight: bold;
+                white-space: nowrap;
+            }
+            .modal-table input[type="text"],
+            .modal-table input[type="number"] {
+                width: calc(100% - 20px); /* Adjust for padding */
+                padding: 8px;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+            }
+            .modal-action-buttons {
+                text-align: center;
+                margin-top: 20px;
+            }
+
+            .modal-action-buttons button {
+                padding: 10px 20px;
+                font-size: 16px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                background-color: #007bff;
+                color: white;
+            }
+
+            .btn-danger {
+                background-color: red;
+            }
+
+            /* Animation */
+            @-webkit-keyframes animatetop {
+                from {top: -300px; opacity: 0}
+                to {top: 0; opacity: 1}
+            }
+            @keyframes animatetop {
+                from {top: -300px; opacity: 0}
+                to {top: 0; opacity: 1}
+            }
+        </style>
+        <%-- Assuming /WEB-INF/views/include/header.jsp exists and is relevant --%>
+        <%-- If not, you might need to remove or replace this include --%>
+        <%@ include file="/WEB-INF/views/include/header.jsp" %>
+    </head>
+
+    <body>
+        <div class="container">
+
+            <div class="content-area">
+
+                <div class="top-section">
+                    <div class="search-bar">
+                        <select id="searchTypeSelect">
+                            <option value="client_id">회사코드</option>
+                            <option value="client_name">회사이름</option>
+                            <option value="member_id">등록담당자</option>
+                        </select>
+                        <input type="text" id="searchKeyword" placeholder="검색어를 입력하세요">
+                        <button class="btn-primary" id="searchButton">검색</button>
+                    </div>
+                    <div class="buttons">
+                        <button class="btn-primary" id="openRegisterModalBtn">추가</button>
+                        <button class="btn-danger" id="deleteSelectedBtn">삭제</button>
+                    </div>
+                </div>
+
+                <h2>거래처 목록</h2>
+                <table class="client-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAllCheckbox"></th>
+                            <th>등록 날짜</th>
+                            <th>회사 코드</th>
+                            <th>회사 이름</th>
+                            <th>주소</th>
+                            <th>전화번호</th>
+                            <th>등록담당자</th>
+                            <th>메모</th>
+                            <th>수정</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientListTableBody">
+                        <%-- Client data will be loaded here by JavaScript --%>
+                    </tbody>
+                </table>
+
+                <div class="pagination" id="paginationControls">
+                    <%-- Pagination controls will be generated here by JavaScript --%>
+                </div>
+            </div>
+        </div>
+
+        <div id="registerModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button register-close-button">&times;</span>
+                <div class="modal-body">
+                    <form id="addClientForm">
+                        <div class="modal-buttons">
+                             <button type="submit" class="btn-submit" id="submitRegisterBtn">등록</button>
+                        </div>
+                        <table class="modal-table">
+                            <thead>
+                                <tr>
+                                    <th>거래처 이름</th>
+                                    <th>주소</th>
+                                    <th>전화번호</th>
+                                    <th>등록담당자</th>
+                                    <th>메모</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" name="client_name" placeholder="거래처 이름" required></td>
+                                    <td><input type="text" name="client_address" placeholder="주소"></td>
+                                    <td><input type="text" name="client_phone" placeholder="전화번호"></td>
+                                    <td><input type="text" name="member_name" placeholder="등록담당자" required></td>
+                                    <td><input type="text" name="client_note" placeholder="메모"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="editModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button edit-close-button">&times;</span>
+                <div class="modal-body">
+                    <form id="editClientForm">
+                        <div class="modal-buttons">
+                            <button type="submit" class="btn-submit" id="submitEditBtn">저장</button>
+                        </div>
+                        <input type="hidden" name="client_id" id="edit_client_id">
+                        <table class="modal-table">
+                            <thead>
+                                <tr>
+                                    <th>회사 코드</th>
+                                    <th>회사 이름</th>
+                                    <th>주소</th>
+                                    <th>전화번호</th>
+                                    <th>메모</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" id="edit_client_id_display" disabled></td>
+                                    <td><input type="text" name="client_name" id="edit_client_name" required></td>
+                                    <td><input type="text" name="client_address" id="edit_client_address"></td>
+                                    <td><input type="text" name="client_phone" id="edit_client_phone"></td>
+                                    <td><input type="text" name="client_note" id="edit_client_note"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const PAGE_SIZE = 10;
+            let currentPage = 0;
+            let searchType = ''; // Default search type
+            let searchKeyword = ''; // Default search keyword
+
+            $(document).ready(function() {
+                // Initialize search type based on the default selected option
+                searchType = $('#searchTypeSelect').val();
+
+                // Load clients on page load
+                loadClients(currentPage);
+
+                // Select All Checkbox
+                $('#selectAllCheckbox').on('change', function() {
+                    $('.client-checkbox').prop('checked', $(this).prop('checked'));
+                });
+
+                // Search Functionality
+                $('#searchTypeSelect').on('change', function() {
+                    searchType = $(this).val();
+                });
+
+                $('#searchButton').on('click', function() {
+                    searchKeyword = $('#searchKeyword').val().trim();
+                    currentPage = 0; // Reset to the first page for new searches
+                    loadClients(currentPage, searchType, searchKeyword);
+                });
+
+                // Add an event listener for the Enter key on the search input
+                $('#searchKeyword').on('keypress', function(e) {
+                    if (e.which === 13) { // 13 is the Enter key
+                        $('#searchButton').click();
+                    }
+                });
+
+
+                // Register Modal
+                $('#openRegisterModalBtn').click(function() {
+                    $('#registerModal').css('display', 'flex');
+                    $('#addClientForm')[0].reset(); // Clear form on open
+                });
+
+                $('.register-close-button').click(function() {
+                    $('#registerModal').hide();
+                });
+
+                $(window).click(function(event) {
+                    if ($(event.target).is('#registerModal')) {
+                        $('#registerModal').hide();
+                    }
+                });
+
+                $('#addClientForm').submit(function(event) { // Use form submit event
+                    event.preventDefault(); // Prevent default form submission
+
+                    const clientData = {
+                        client_name: $('input[name="client_name"]', this).val(),
+                        client_address: $('input[name="client_address"]', this).val(),
+                        client_phone: $('input[name="client_phone"]', this).val(),
+                        member_name: $('input[name="member_name"]', this).val(), // Mapping to member_id
+                        client_note: $('input[name="client_note"]', this).val()
+                    };
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/client/register',
+                        contentType: 'application/json', // Send as JSON
+                        data: JSON.stringify(clientData),
+                        success: function(response) {
+                            alert(response);
+                            $('#registerModal').hide();
+                            loadClients(currentPage, searchType, searchKeyword); // Reload with current search
+                        },
+                        error: function(xhr, status, error) {
+                            alert('Error registering client: ' + xhr.responseText);
+                        }
+                    });
+                });
+
+                // Edit Modal: Triggered by clicking a button in the row
+                $(document).on('click', '.btn-edit-row', function() {
+                    const clientIdToEdit = $(this).data('client-id');
+                    loadClientForEdit(clientIdToEdit);
+                });
+
+                $('.edit-close-button').click(function() {
+                    $('#editModal').hide();
+                    $('#editClientForm')[0].reset();
+                });
+
+                $(window).click(function(event) {
+                    if ($(event.target).is('#editModal')) {
+                        $('#editModal').hide();
+                        $('#editClientForm')[0].reset();
+                    }
+                });
+
+                $('#editClientForm').submit(function(event) { // Use form submit event
+                    event.preventDefault(); // Prevent default form submission
+
+                    const clientData = {
+                        client_id: $('#edit_client_id').val(),
+                        client_name: $('#edit_client_name').val(),
+                        client_address: $('#edit_client_address').val(),
+                        client_phone: $('#edit_client_phone').val(),
+                        client_note: $('#edit_client_note').val(),
+                        client_member_id: $('#edit_client_note').val(),
+                    };
+
+                    if (!clientData.client_name) {
+                        alert('필수 필드(회사 이름)를 입력해주세요.');
+                        return;
+                    }
+
+                    $.ajax({
+                        type: 'PUT',
+                        url: '/client/update',
+                        contentType: 'application/json',
+                        data: JSON.stringify(clientData),
+                        success: function(response) {
+                            alert(response);
+                            $('#editModal').hide();
+                            loadClients(currentPage, searchType, searchKeyword); // Reload with current search
+                        },
+                        error: function(xhr, status, error) {
+                            alert('Error updating client: ' + xhr.responseText);
+                        }
+                    });
+                });
+
+                // Delete Function
+                $('#deleteSelectedBtn').click(function() {
+                    const selectedClientIds = getSelectedClientIds();
+                    if (selectedClientIds.length === 0) {
+                        alert('삭제할 거래처를 선택해주세요.');
+                        return;
+                    }
+
+                    if (confirm('선택된 ' + selectedClientIds.length + '개의 거래처를 정말 삭제하시겠습니까?')) {
+                        $.ajax({
+                            type: 'DELETE',
+                            url: '/client/delete',
+                            contentType: 'application/json',
+                            data: JSON.stringify(selectedClientIds),
+                            success: function(response) {
+                                alert(response);
+                                loadClients(currentPage, searchType, searchKeyword); // Reload with current search
+                                $('#selectAllCheckbox').prop('checked', false);
+                            },
+                            error: function(xhr, status, error) {
+                                alert('Error deleting clients: ' + xhr.responseText);
+                            }
+                        });
+                    }
+                });
+
+                // Pagination
+                $(document).on('click', '.pagination a', function(e) {
+                    e.preventDefault();
+                    const pageNum = parseInt($(this).data('page'));
+                    if (pageNum !== currentPage) {
+                        currentPage = pageNum;
+                        loadClients(currentPage, searchType, searchKeyword); // Pass search parameters on pagination
+                    }
+                });
+            });
+
+            function loadClients(page, type = '', keyword = '') {
+                $.ajax({
+                    type: 'GET',
+                    url: '/client/data', // New AJAX endpoint for data
+                    dataType: 'json',
+                    data: {
+                        page: page,
+                        size: PAGE_SIZE,
+                        sortBy: 'created_date', // Ensure sorting by creation date
+                        sortDirection: 'desc',
+                        searchType: type,
+                        searchKeyword: keyword
+                    },
+                    success: function(response) {
+                        const clients = response.clients;
+                        const totalPages = response.totalPages;
+                        const currentPage = response.currentPage;
+
+                        $('#clientListTableBody').empty();
+                        $('#selectAllCheckbox').prop('checked', false); // Uncheck select all
+                        if (clients.length === 0) {
+                            $('#clientListTableBody').append('<tr><td colspan="9">등록된 거래처가 없습니다.</td></tr>');
+                        } else {
+                            $.each(clients, function(index, client) {
+                                $('#clientListTableBody').append(
+                                    '<tr>' +
+                                    '<td><input type="checkbox" class="client-checkbox" data-client-id="' + client.client_id + '"></td>' +
+                                    '<td>' + (client.created_date ? new Date(client.created_date).toLocaleDateString() : '') + '</td>' +
+                                    '<td>' + client.client_id + '</td>' +
+                                    '<td>' + client.client_name + '</td>' +
+                                    '<td>' + client.client_address + '</td>' +
+                                    '<td>' + client.client_phone + '</td>' +
+                                    '<td>' + client.member_id + '</td>' +
+                                    '<td>' + (client.client_note ? client.client_note : '') + '</td>' +
+                                    '<td><button class="btn-edit-row" data-client-id="' + client.client_id + '">수정</button></td>' +
+                                    '</tr>'
+                                );
+                            });
+                        }
+                        updatePaginationControls(totalPages, currentPage);
+                    },
+                    error: function(xhr, status, error) {
+                        $('#clientListTableBody').append('<tr><td colspan="9">거래처를 불러오는 중 오류 발생: ' + error + '</td></tr>');
+                        $('#paginationControls').empty();
+                    }
+                });
+            }
+
+            function getSelectedClientIds() {
+                const selectedIds = [];
+                $('.client-checkbox:checked').each(function() {
+                    selectedIds.push($(this).data('client-id'));
+                });
+                return selectedIds;
+            }
+
+            function loadClientForEdit(clientId) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/client/' + clientId, // Use /client/{client_id} endpoint
+                    dataType: 'json',
+                    success: function(client) {
+                        $('#edit_client_id').val(client.client_id);
+                        $('#edit_client_id_display').val(client.client_id); // For display
+                        $('#edit_client_name').val(client.client_name);
+                        $('#edit_client_address').val(client.client_address);
+                        $('#edit_client_phone').val(client.client_phone);
+                        $('#edit_client_note').val(client.client_note);
+
+                        $('#editModal').css('display', 'flex');
+                    },
+                    error: function(xhr, status, error) {
+                        alert('거래처 정보를 불러오는 중 오류 발생: ' + xhr.responseText);
+                    }
+                });
+            }
+
+            function updatePaginationControls(totalPages, currentPage) {
+                const paginationDiv = $('#paginationControls');
+                paginationDiv.empty();
+
+                const maxPageLinks = 10;
+                let startPage = Math.max(0, currentPage - Math.floor(maxPageLinks / 2));
+                let endPage = Math.min(totalPages - 1, startPage + maxPageLinks - 1);
+
+                if (endPage - startPage + 1 < maxPageLinks) {
+                    startPage = Math.max(0, endPage - maxPageLinks + 1);
+                }
+
+                if (currentPage > 0) {
+                    paginationDiv.append('<a href="#" data-page="' + (currentPage - 1) + '">이전</a>');
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    const activeClass = (i === currentPage) ? 'active' : '';
+                    paginationDiv.append('<a href="#" data-page="' + i + '" class="' + activeClass + '">' + (i + 1) + '</a>');
+                }
+
+                if (currentPage < totalPages - 1) {
+                    paginationDiv.append('<a href="#" data-page="' + (currentPage + 1) + '">다음</a>');
+                }
+            }
+        </script>
+    </body>
+</html>

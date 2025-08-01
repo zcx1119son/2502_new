@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.foursquare.nextrozi.signup.dao.SignupDAO">
+
+    <insert id="insertCompany" parameterType="com.foursquare.nextrozi.signup.vo.SignupVO">
+        INSERT INTO tb_company (
+            company_code,
+            company_name,
+            company_email,
+            company_pwd,
+            company_ownername,
+            company_phone,
+            created_date,
+            created_id
+        ) VALUES (
+            #{company_code},
+            #{company_name},
+            #{company_email},
+            #{company_pwd},
+            #{company_ownername},
+            #{company_phone},
+            #{created_date},
+            #{created_id}
+        )
+    </insert>
+
+    <select id="countByEmail" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM tb_company WHERE company_email = #{companyEmail}
+    </select>
+
+    <select id="selectCompanyByEmail" parameterType="string" resultType="com.foursquare.nextrozi.signup.vo.SignupVO">
+        SELECT
+            company_code,
+            company_name,
+            company_email,
+            company_pwd,
+            company_ownername,
+            company_phone,
+            created_date,
+            created_id,
+            updated_data,
+            updated_id
+        FROM tb_company
+        WHERE company_email = #{companyEmail}
+    </select>
+
+    <select id="countByCompanyCode" parameterType="string" resultType="int">
+        SELECT COUNT(*) FROM tb_company WHERE company_code = #{companyCode}
+    </select>
+
+</mapper>

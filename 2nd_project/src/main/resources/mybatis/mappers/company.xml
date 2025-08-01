@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foursquare.nextrozi.company.dao.CompanyMapper">
+
+    <resultMap id="companyResultMap" type="com.foursquare.nextrozi.company.vo.CompanyVO">
+        <id property="member_id" column="member_id"/>
+        <result property="department_id" column="department_id"/>
+        <result property="member_name" column="member_name"/>
+        <result property="member_email" column="member_email"/>
+        <result property="department_name" column="department_name"/>
+        <result property="job_title" column="job_title"/>
+    </resultMap>
+
+    <select id="getCompanyInfo" resultMap="companyResultMap">
+        SELECT
+        M.MEMBER_NAME,
+        M.MEMBER_EMAIL,
+        D.DEPARTMENT_NAME,  -- Make sure this is present and spelled correctly
+        E.JOB_TITLE,        -- Make sure this is present and spelled correctly
+        M.MEMBER_ID,
+        E.DEPARTMENT_ID
+        FROM
+        TB_MEMBER M
+        RIGHT JOIN
+        TB_EMP E ON M.MEMBER_ID = E.MEMBER_ID
+        RIGHT JOIN
+        TB_DEPARTMENT D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+        ORDER BY
+        D.DEPARTMENT_NAME, M.MEMBER_NAME
+    </select>
+</mapper>

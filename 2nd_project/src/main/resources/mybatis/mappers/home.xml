@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.foursquare.nextrozi.home.dao.HomeDAO">
+
+    <!-- 결과 매핑 -->
+    <resultMap id="calendarResultMap" type="com.foursquare.nextrozi.home.vo.HomeVO">
+        <id property="eventId" column="event_id"/>
+        <result property="eventTitle" column="event_title"/>
+        <result property="memberName" column="member_name"/>
+        <result property="eventContent" column="event_content"/>
+        <result property="companyName" column="company_name"/>
+        <result property="clientNote" column="client_note"/>
+        <result property="eventStartDate" column="event_start_date"/>
+        <result property="eventEndDate" column="event_end_date"/>
+        <result property="productId" column="product_id"/>
+        <result property="productName" column="product_name"/>
+        <result property="createdDate" column="created_date"/>
+        <result property="createdId" column="created_id"/>
+        <result property="updatedDate" column="updated_date"/>
+        <result property="updatedId" column="updated_id"/>
+        <result property="priority" column="priority"/>
+    </resultMap>
+
+    <!-- 전체 일정 조회 -->
+    <select id="getAllEvents" resultMap="calendarResultMap">
+        SELECT *
+        FROM tb_calendar
+        ORDER BY event_start_date ASC
+    </select>
+
+    <!-- ID로 일정 조회 -->
+    <select id="getEventById" parameterType="long" resultMap="calendarResultMap">
+        SELECT *
+        FROM tb_calendar
+        WHERE event_id = #{eventId}
+    </select>
+
+    <!-- 일정 등록 -->
+    <insert id="insertEvent" parameterType="com.foursquare.nextrozi.home.vo.HomeVO">
+        INSERT INTO tb_calendar (
+        event_title,
+        member_name,
+        event_content,
+        company_name,
+        client_note,
+        event_start_date,
+        event_end_date,
+        product_id,
+        product_name,
+        created_id,
+        updated_id,
+        priority
+        ) VALUES (
+        #{eventTitle, jdbcType=VARCHAR},
+        #{memberName, jdbcType=VARCHAR},
+        #{eventContent, jdbcType=VARCHAR},
+        #{companyName, jdbcType=VARCHAR},
+        NVL(#{clientNote, jdbcType=VARCHAR}, ''),
+        #{eventStartDate, jdbcType=TIMESTAMP},
+        #{eventEndDate, jdbcType=TIMESTAMP},
+        NVL(#{productId, jdbcType=NUMERIC}, 0),
+        NVL(#{productName, jdbcType=VARCHAR}, '기본상품'),
+        #{createdId, jdbcType=VARCHAR},
+        #{updatedId, jdbcType=VARCHAR},
+        NVL(#{priority, jdbcType=VARCHAR}, 'LOW')
+        )
+    </insert>
+
+    <!-- 일정 수정 -->
+    <update id="updateEvent" parameterType="com.foursquare.nextrozi.home.vo.HomeVO">
+        UPDATE tb_calendar
+        SET
+        event_title = #{eventTitle, jdbcType=VARCHAR},
+        member_name = #{memberName, jdbcType=VARCHAR},
+        event_content = #{eventContent, jdbcType=VARCHAR},
+        company_name = #{companyName, jdbcType=VARCHAR},
+        client_note = NVL(#{clientNote, jdbcType=VARCHAR}, ''),
+        event_start_date = #{eventStartDate, jdbcType=TIMESTAMP},
+        event_end_date = #{eventEndDate, jdbcType=TIMESTAMP},
+        product_id = NVL(#{productId, jdbcType=NUMERIC}, 0),
+        product_name = NVL(#{productName, jdbcType=VARCHAR}, '기본상품'),
+        updated_date = SYSDATE,
+        updated_id = #{updatedId, jdbcType=VARCHAR},
+        priority = NVL(#{priority, jdbcType=VARCHAR}, 'LOW')
+        WHERE event_id = #{eventId}
+    </update>
+
+
+
+
+    <!-- 일정 삭제 -->
+    <delete id="deleteEvent" parameterType="long">
+        DELETE FROM tb_calendar
+        WHERE event_id = #{eventId}
+    </delete>
+
+</mapper>
